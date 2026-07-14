@@ -392,9 +392,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- LINE固定ボタン ---
-  const lf = document.getElementById('lineFloat');
-  new IntersectionObserver((entries) => {
-    entries.forEach(e => lf.classList.toggle('visible', !e.isIntersecting));
-  }).observe(document.getElementById('hero'));
+  // --- カートに入れるボタン ---
+  document.querySelectorAll('.product-inquiry:not(.inquiry-notify)').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (btn.classList.contains('added')) return;
+      btn.classList.add('added');
+      btn.textContent = '追加済み';
+    });
+  });
 });
