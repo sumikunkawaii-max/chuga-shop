@@ -1,22 +1,168 @@
 /* ========================================
-   セレクト昆虫専門店 - メインスクリプト v4
-   全機能: フィルター/検索/モーダル/お気に入り/FAQ/タブ
+   セレクト昆虫専門店 - メインスクリプト v5
+   ダンゴムシ・ワラジムシ特化 + 飼育環境マニュアル
    ======================================== */
 
-// --- 商品の飼育データ ---
+// --- 飼育環境マニュアルデータ ---
 const careData = {
-  gbb:  { temp: '24-28°C', humidity: '60-70%', food: 'コオロギ・デュビア', lifespan: 'メス12-15年 / オス3-4年', notes: '新世界種。刺激毛を飛ばすことがあるため素手での取り扱いは避ける。美しい青い体色と独特のウェブが最大の魅力。' },
-  mrk:  { temp: '24-28°C', humidity: '60-70%', food: 'コオロギ・デュビア', lifespan: 'メス25-30年 / オス5-7年', notes: '世界で最も人気のあるタランチュラ。非常に温厚で動きも緩やか。CITES付属書IIに掲載されており、正規ルートでの入手が重要。' },
-  cb:   { temp: '24-28°C', humidity: '70-80%', food: 'コオロギ・デュビア', lifespan: 'メス15-20年 / オス3-4年', notes: '旧世界種のため刺激毛がなく、代わりに噛みつきで防御する。動きが非常に速く、取り扱いには十分な経験が必要。' },
-  glt:  { temp: '26-30°C', humidity: '75-85%', food: 'コオロギ・デュビア・ピンクマウス', lifespan: 'メス15-25年 / オス3-6年', notes: '世界最大のタランチュラ。体重は170gを超えることも。威嚇時に後ろ脚を擦り合わせて音を出す独特の行動が特徴。' },
-  emp:  { temp: '25-30°C', humidity: '70-80%', food: 'コオロギ・デュビア', lifespan: '6-8年', notes: 'アフリカ産の大型サソリ。毒性は弱いが鋏の力は強い。群れでの飼育も可能で、複数匹での飼育が観察の面白さを増す。' },
-  afs:  { temp: '24-28°C', humidity: '70-80%', food: 'コオロギ・デュビア', lifespan: '5-7年', notes: 'アジア産の森林棲サソリ。毒性が弱く温厚で、サソリ飼育の入門種として最適。湿度管理がやや重要。' },
-  vrc:  { temp: '25-30°C', humidity: '70-80%', food: 'コオロギ・デュビア', lifespan: '5-8年', notes: '東南アジア産の大型ムカデ。動きが速く攻撃的なため、必ずピンセットで取り扱う。深紅の脚が非常に美しい。' },
-  mp:   { temp: '20-25°C', humidity: '60-70%', food: '落ち葉・野菜くず・フィッシュフード', lifespan: '2-3年', notes: '紫と橙のツートンカラーが特徴のワラジムシ。繁殖も容易で、コロニーの成長を楽しめる。多湿すぎると逆に弱るので注意。' },
-  zb:   { temp: '20-25°C', humidity: '60-70%', food: '落ち葉・野菜くず', lifespan: '2-3年', notes: '白と黒のゼブラ模様が美しいダンゴムシの仲間。飼育は容易で、丸まる姿が愛らしい。' },
-  mhc:  { temp: '25-30°C', humidity: '60-70%', food: '野菜・果物・ドッグフード', lifespan: '3-5年', notes: 'マダガスカル原産の大型ゴキブリ。翅がなく飛べない。危険を感じると「シュー」と音を出す。毒なし・噛まない・臭くないの三拍子で入門に最適。' },
-  kit:  null,
-  feed: null
+  zebra: {
+    origin: 'フランス南部・南ヨーロッパ',
+    maxSize: '最大約1.8cm',
+    lifespan: '2-3年',
+    case: 'プラケース（20×15cm以上）。蓋に通気口があるもの。コバエ防止シート推奨',
+    substrate: '腐葉土 5 : 砕き石灰石 3 : 赤玉土 2 の配合。厚さ3-5cm。表面に落ち葉を敷く',
+    temp: '20-25°C（18°C以下では活動が鈍る。30°C以上は危険）',
+    humidity: 'ケースの片側を湿らせ、片側を乾燥に保つ（湿度勾配）。霧吹きは2-3日に1回、湿った側のみ',
+    food: '【主食】クヌギ・コナラの落ち葉（乾燥させたもの）\n【副食】にんじん・きゅうり・かぼちゃ等の野菜くず（週2回交換）\n【タンパク源】フィッシュフード・乾燥エビを週1回少量\n【カルシウム】カトルボーンまたは石灰石を常設',
+    breeding: '比較的容易。安定した環境（22-24°C、適切な湿度）を維持すれば自然繁殖する。メスは育児嚢で約1ヶ月間稚虫を育て、10-30匹を産む。稚虫は親と同じ環境で飼育可能',
+    tips: '乾燥に比較的強い種だが、脱皮時は湿度が重要。脱皮不全を防ぐため、常にケースの一部は湿っている状態を保つ。白い部分が黄ばんできたら石灰石の補充サイン。落ち葉は食べ残しても取り除かず、自然に分解させる'
+  },
+  mp: {
+    origin: '品種改良種（原種: Armadillidium vulgare / ヨーロッパ原産）',
+    maxSize: '最大約2cm',
+    lifespan: '2-3年',
+    case: 'プラケース（20×15cm以上）。通気口付きの蓋。群れで飼育するため少し広めが理想',
+    substrate: '腐葉土 5 : 砕き石灰石 3 : 赤玉土 2。厚さ3-5cm。表面に広葉樹の落ち葉を敷く',
+    temp: '20-25°C（高温に弱いため夏場は注意。エアコン管理推奨）',
+    humidity: '60-70%。片側湿潤・片側乾燥の湿度勾配を作る。霧吹きは2-3日に1回',
+    food: '【主食】クヌギ・コナラの落ち葉\n【副食】にんじん・かぼちゃ等の野菜くず\n【タンパク源】フィッシュフードまたはドッグフードを週1回\n【カルシウム】カトルボーン常設。色の維持にカルシウムが重要',
+    breeding: '容易。原種(A. vulgare)は繁殖力が高く、安定環境で自然に増える。一度に20-40匹の稚虫を産む。マジックポーションの色は遺伝するが、まれに原種カラーが出ることもある',
+    tips: '紫と橙の発色を維持するにはカルシウムの十分な供給が重要。色が薄くなってきたらカトルボーンを追加する。多湿すぎるとダニの発生原因になるため、通気性を確保すること。コロニーが大きくなったら定期的に間引き（販売・譲渡）するとよい'
+  },
+  wo: {
+    origin: 'ギリシャ',
+    maxSize: '最大約1.5cm',
+    lifespan: '2-3年',
+    case: 'プラケース（15×10cm以上）。小型種のため隙間からの脱走に注意',
+    substrate: '腐葉土 4 : 砕き石灰石 4 : 赤玉土 2。石灰石多めがポイント。厚さ2-4cm',
+    temp: '18-24°C（高温に弱い。25°C以上が続くと調子を崩す）',
+    humidity: '60-65%。やや乾燥気味を好む。霧吹きは3-4日に1回、軽く',
+    food: '【主食】落ち葉（クヌギ・コナラ）\n【副食】にんじんの薄切り\n【タンパク源】フィッシュフード少量を週1回\n【カルシウム】石灰石を床材に多めに配合 + カトルボーン常設',
+    breeding: 'やや難しい。成長速度が遅く、繁殖サイクルも長い。1回の出産で5-15匹程度。焦らず安定した環境を維持することが大切',
+    tips: '高温に弱いため、夏場のエアコン管理は必須。直射日光は厳禁。乾燥気味の環境を好むが、脱皮のために湿った場所も必要。オレンジの発色は健康のバロメーター。色が褪せたら環境を見直す'
+  },
+  mn: {
+    origin: 'モンテネグロ（バルカン半島）',
+    maxSize: '最大約2cm',
+    lifespan: '2-3年',
+    case: 'プラケース（20×15cm以上）。ヨーロッパ産のため比較的丈夫',
+    substrate: '腐葉土 5 : 砕き石灰石 3 : 赤玉土 2。厚さ3-5cm',
+    temp: '18-24°C（冷涼な環境を好む。夏場の高温対策が重要）',
+    humidity: '60-70%。片側湿潤・片側乾燥。霧吹きは2-3日に1回',
+    food: '【主食】落ち葉（クヌギ・コナラ）\n【副食】野菜くず各種\n【タンパク源】フィッシュフード・乾燥エビを週1回\n【カルシウム】カトルボーン常設',
+    breeding: 'やや難しい。繁殖ペースは遅めだが、安定した環境なら着実に増える。1回10-20匹程度',
+    tips: 'バルカン半島原産のため冷涼な環境を好む。日本の夏は高温になりがちなので、エアコンのある部屋で管理すること。落ち葉は十分に乾燥させてから投入すると、カビの発生を抑えられる'
+  },
+  pk: {
+    origin: 'タイ（石灰岩地帯）',
+    maxSize: '最大約1.5cm',
+    lifespan: '3-5年',
+    case: 'プラケース（20×15cm以上）。密閉性が高いケースが適する（高湿度維持のため）。通気口は小さめに',
+    substrate: '腐葉土 3 : 砕き石灰石 5 : 赤玉土 2。石灰石を非常に多めに配合するのがCubaris飼育のポイント。厚さ4-6cm。石灰岩の塊もいくつか置く',
+    temp: '22-27°C（20°C以下では活動が著しく低下。30°C以上は危険）',
+    humidity: '75-85%。高湿度が必須。霧吹きは毎日〜2日に1回。ただし水浸しにはしない',
+    food: '【主食】落ち葉（広葉樹）。Cubaris系は落ち葉の消費が多い\n【副食】にんじん・かぼちゃ\n【タンパク源】フィッシュフード・乾燥エビ。Armadillidiumより多めに与える\n【カルシウム】石灰石を大量に。カトルボーン常設。Cubaris系はカルシウム要求量が高い',
+    breeding: '難しい。繁殖サイクルが非常に遅く、1回の出産で5-10匹程度。稚虫の成長も遅い。「増えない」と感じても、最低6ヶ月は辛抱強く待つ',
+    tips: '石灰岩の洞窟に生息する種のため、石灰石の量が飼育成功のカギ。床材の半分近くを石灰石にするくらいでちょうどよい。コルクバークや石灰岩の塊でシェルターを作ると、その下に集まって生活する。高湿度を維持しつつもカビには注意。通気が悪いとカビが発生するので、週1回は蓋を開けて換気する'
+  },
+  rpk: {
+    origin: 'タイ（石灰岩地帯）',
+    maxSize: '最大約1.5cm',
+    lifespan: '3-5年',
+    case: 'パンダキングと同様。プラケース（20×15cm以上）。密閉性高めのケース',
+    substrate: '腐葉土 3 : 砕き石灰石 5 : 赤玉土 2。パンダキングと同じ配合。厚さ4-6cm',
+    temp: '22-27°C（パンダキングと同じ温度帯）',
+    humidity: '75-85%。高湿度維持が必須。毎日〜2日に1回の霧吹き',
+    food: '【主食】落ち葉（広葉樹）\n【副食】にんじん・かぼちゃ\n【タンパク源】フィッシュフード・乾燥エビを多めに\n【カルシウム】石灰石大量 + カトルボーン常設',
+    breeding: '難しい。パンダキングと同様に繁殖ペースが遅い。赤い発色を維持するには栄養バランスが重要',
+    tips: '基本的な飼育方法はパンダキングと同じ。赤い色素の維持にはカロテノイド系の餌（にんじん等）が効果的という説がある。パンダキングとの混合飼育は避け、別ケースで管理すること'
+  },
+  cp: {
+    origin: '東南アジア（詳細産地不明）',
+    maxSize: '最大約1.2cm',
+    lifespan: '3-5年',
+    case: 'プラケース（15×10cm以上）。小型種のため小さめのケースでもOK。密閉性高め',
+    substrate: '腐葉土 3 : 砕き石灰石 5 : 赤玉土 2。石灰石多めはCubaris共通。厚さ3-5cm',
+    temp: '23-27°C（やや暖かめを好む）',
+    humidity: '75-85%。高湿度維持。霧吹きは毎日〜2日に1回',
+    food: '【主食】落ち葉（広葉樹）\n【副食】にんじん・かぼちゃ\n【タンパク源】フィッシュフード。小型種のため細かく砕いて与える\n【カルシウム】石灰石+カトルボーン',
+    breeding: 'やや難しい。他のCubarisと同様に繁殖は遅いが、パンダキングよりはやや容易。1回5-10匹程度',
+    tips: '小型で動きが可愛らしいCubaris。茶色と白のコーヒーのような色合いが名前の由来。シェルターの下に固まって生活するため、コルクバークは必ず設置する。床材の乾燥に注意し、カビとのバランスを見ながら湿度管理を行う'
+  },
+  pp: {
+    origin: '東南アジア',
+    maxSize: '最大約1.3cm',
+    lifespan: '3-5年',
+    case: 'プラケース（15×10cm以上）。密閉性高めのケース',
+    substrate: '腐葉土 3 : 砕き石灰石 5 : 赤玉土 2。厚さ3-5cm',
+    temp: '23-27°C',
+    humidity: '75-85%。高湿度維持必須',
+    food: '【主食】落ち葉（広葉樹）\n【副食】にんじん・かぼちゃ\n【タンパク源】フィッシュフード週1-2回\n【カルシウム】石灰石+カトルボーン常設',
+    breeding: 'やや難しい。Cubaris共通で繁殖ペースは遅い。ピンクの発色が美しい個体を選別して累代すると良い',
+    tips: 'ピンクと白のパステルカラーが非常に美しい種。Cubaris系共通の高湿度・石灰石多め環境で飼育する。色の薄い個体が生まれることもあるが、成長とともに発色が良くなることが多い'
+  },
+  rt: {
+    origin: '世界各地（培養品）',
+    maxSize: '約1-2mm',
+    lifespan: '数ヶ月（コロニー単位で永続）',
+    case: '密閉容器（タッパー等）。通気口は不要（むしろ密閉の方が良い）。底面に水苔やココナッツファイバーを敷く',
+    substrate: '水で湿らせた木炭の上で培養するのが最も簡単。または湿らせたココナッツファイバー。常に湿った状態を保つ',
+    temp: '20-28°C（室温で十分）',
+    humidity: '80-95%。とにかく高湿度。乾燥は厳禁。容器内に水滴がつく程度が理想',
+    food: '【主食】ドライイースト（パン酵母）を少量ふりかける\n【代替】米粉・フィッシュフードの粉末\n与えすぎるとカビの原因になるため、少量を2-3日に1回',
+    breeding: '非常に容易。適切な環境なら爆発的に増える。増えすぎたらダンゴムシ・ワラジムシのケースに投入すると掃除役として活躍',
+    tips: 'ダンゴムシ・ワラジムシケースの「掃除屋」として導入するのが主な用途。カビや食べ残しを分解してくれる。単独培養も簡単で、木炭+ドライイーストの方法なら初心者でも失敗しにくい。赤い体色が美しく、ケース内のアクセントにもなる'
+  },
+  mr: {
+    origin: '東南アジア',
+    maxSize: '最大約2.5cm',
+    lifespan: '2-4年',
+    case: 'プラケース（20×15cm以上）。中型種のためやや広めが良い',
+    substrate: '腐葉土 4 : 砕き石灰石 3 : 赤玉土 2 : ヤシガラ 1。Merulanella系は腐葉土多めを好む。厚さ4-6cm',
+    temp: '22-28°C（熱帯産のためやや暖かめ）',
+    humidity: '70-80%。高めの湿度を好むが、Cubarisほどではない。霧吹きは2日に1回程度',
+    food: '【主食】落ち葉（広葉樹）。消費量が多い\n【副食】野菜くず各種。きゅうり・にんじんが好評\n【タンパク源】フィッシュフード・ドッグフードを週2回\n【カルシウム】カトルボーン常設',
+    breeding: '比較的容易。Cubarisより繁殖ペースが速い。1回10-20匹程度の稚虫を産む',
+    tips: '大型で見応えのある種。落ち葉の消費が激しいので、常にストックを切らさないこと。コルクバークの下に潜む習性があるため、シェルターは必ず設置。比較的丈夫で初心者にもおすすめできるMerulanella系の入門種'
+  },
+  ws: {
+    origin: 'ヨーロッパ南部',
+    maxSize: '最大約2cm',
+    lifespan: '2-3年',
+    case: 'プラケース（20×15cm以上）。通気口付きの蓋',
+    substrate: '腐葉土 5 : 砕き石灰石 3 : 赤玉土 2。厚さ3-5cm',
+    temp: '20-25°C',
+    humidity: '60-70%。片側湿潤・片側乾燥の勾配。霧吹き2-3日に1回',
+    food: '【主食】落ち葉（クヌギ・コナラ）\n【副食】野菜くず\n【タンパク源】フィッシュフードを週1回\n【カルシウム】カトルボーン常設+床材に石灰石配合',
+    breeding: 'やや難しい。繁殖ペースはゆっくりだが、安定した環境なら着実に増える。1回10-15匹程度',
+    tips: '白とグレーのシャープな模様が名前の由来。Armadillidium系の標準的な飼育方法で管理できる。模様の出方に個体差があるため、選別累代でより美しい模様を目指すのも楽しみのひとつ'
+  },
+  gt: {
+    origin: 'イタリア（サルデーニャ島）',
+    maxSize: '最大約2cm',
+    lifespan: '2-3年',
+    case: 'プラケース（20×15cm以上）。通気口付き',
+    substrate: '腐葉土 5 : 砕き石灰石 3 : 赤玉土 2。厚さ3-5cm',
+    temp: '20-25°C（地中海性気候の種のため極端な高温・低温を避ける）',
+    humidity: '60-70%。やや乾燥気味でもOK。霧吹きは3日に1回程度',
+    food: '【主食】落ち葉（クヌギ・コナラ）\n【副食】野菜くず・果物の皮\n【タンパク源】フィッシュフード週1回\n【カルシウム】カトルボーン常設',
+    breeding: '比較的容易。Armadillidium gestroiは丈夫で繁殖もしやすい。1回15-30匹程度の稚虫を産む',
+    tips: '地中海原産のため乾燥にも比較的強い。オレンジがかった美しい体色が特徴。Armadillidium系の入門種として最適で、丈夫さと美しさを兼ね備えている。コロニーが安定すれば順調に数が増える'
+  },
+  ad: {
+    origin: 'タイ',
+    maxSize: '最大約1.3cm',
+    lifespan: '3-5年',
+    case: 'プラケース（15×10cm以上）。密閉性高めのケース。Cubaris系共通',
+    substrate: '腐葉土 3 : 砕き石灰石 5 : 赤玉土 2。石灰石を非常に多めに。厚さ4-6cm。石灰岩の塊もシェルターとして設置',
+    temp: '23-27°C',
+    humidity: '75-85%。高湿度必須。霧吹きは毎日〜2日に1回',
+    food: '【主食】落ち葉（広葉樹）\n【副食】にんじん・かぼちゃ\n【タンパク源】フィッシュフード・乾燥エビ\n【カルシウム】石灰石大量+カトルボーン',
+    breeding: '難しい。Cubaris系で最も人気があるが、繁殖は遅い。1回3-8匹程度と少数。「ラバーダッキー」の別名の通り、可愛らしい姿で人気が高い',
+    tips: '琥珀色の美しい体色が最大の魅力。Cubaris系の中でも特に人気が高く、入手困難になることも。飼育自体はCubaris共通の方法で問題ないが、繁殖が遅いため大事に管理すること。石灰岩のシェルターは必須。パンダキング同様、石灰石の量が成功のカギ'
+  },
+  kit: null,
+  sub: null
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,13 +184,9 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileMenu.classList.toggle('active');
     document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
   });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navToggle.classList.remove('active');
-      mobileMenu.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-  });
+  mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    navToggle.classList.remove('active'); mobileMenu.classList.remove('active'); document.body.style.overflow = '';
+  }));
 
   // --- スクロールアニメーション ---
   const fadeObserver = new IntersectionObserver((entries) => {
@@ -55,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.fade-up').forEach((el) => {
+  document.querySelectorAll('.fade-up').forEach(el => {
     const siblings = el.parentElement.querySelectorAll(':scope > .fade-up');
     el.dataset.delay = Array.from(siblings).indexOf(el) * 80;
     fadeObserver.observe(el);
@@ -64,123 +206,129 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- カテゴリフィルター ---
   const filterTabs = document.querySelectorAll('.filter-tab');
   const productCards = document.querySelectorAll('.product-card');
+  const productsEmpty = document.getElementById('productsEmpty');
+
   filterTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       filterTabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       const cat = tab.dataset.category;
+      let visibleCount = 0;
       productCards.forEach(card => {
-        card.classList.toggle('filtered-out', cat !== 'all' && card.dataset.category !== cat);
+        const show = cat === 'all' || card.dataset.category === cat;
+        card.classList.toggle('filtered-out', !show);
+        if (show) visibleCount++;
       });
+      // 準備中メッセージの表示
+      productsEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
     });
   });
 
   // --- 商品検索 ---
   const searchInput = document.getElementById('productSearch');
   searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase().trim();
-    // フィルタータブを「すべて」に戻す
-    if (query) {
-      filterTabs.forEach(t => t.classList.remove('active'));
-      filterTabs[0].classList.add('active');
-    }
+    const q = searchInput.value.toLowerCase().trim();
+    if (q) { filterTabs.forEach(t => t.classList.remove('active')); filterTabs[0].classList.add('active'); }
+    let visibleCount = 0;
     productCards.forEach(card => {
-      if (!query) {
-        card.classList.remove('filtered-out');
-        return;
-      }
+      if (!q) { card.classList.remove('filtered-out'); visibleCount++; return; }
       const name = card.querySelector('.product-name').textContent.toLowerCase();
-      const sci = card.querySelector('.product-scientific')?.textContent.toLowerCase() || '';
-      const cat = card.querySelector('.product-category')?.textContent.toLowerCase() || '';
-      card.classList.toggle('filtered-out', !name.includes(query) && !sci.includes(query) && !cat.includes(query));
+      const sci = (card.querySelector('.product-scientific')?.textContent || '').toLowerCase();
+      const show = name.includes(q) || sci.includes(q);
+      card.classList.toggle('filtered-out', !show);
+      if (show) visibleCount++;
     });
+    productsEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
   });
 
   // --- お気に入り ---
   let favorites = JSON.parse(localStorage.getItem('selectInsectsFav') || '[]');
   const favBtns = document.querySelectorAll('.fav-btn');
-
-  function updateFavUI() {
-    favBtns.forEach(btn => {
-      btn.classList.toggle('active', favorites.includes(btn.dataset.id));
-    });
-  }
-
-  favBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const id = btn.dataset.id;
-      const idx = favorites.indexOf(id);
-      if (idx > -1) favorites.splice(idx, 1);
-      else favorites.push(id);
-      localStorage.setItem('selectInsectsFav', JSON.stringify(favorites));
-      updateFavUI();
-    });
-  });
+  function updateFavUI() { favBtns.forEach(btn => btn.classList.toggle('active', favorites.includes(btn.dataset.id))); }
+  favBtns.forEach(btn => btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const id = btn.dataset.id;
+    const idx = favorites.indexOf(id);
+    if (idx > -1) favorites.splice(idx, 1); else favorites.push(id);
+    localStorage.setItem('selectInsectsFav', JSON.stringify(favorites));
+    updateFavUI();
+  }));
   updateFavUI();
 
-  // --- 商品モーダル ---
+  // --- モーダル ---
   const modalOverlay = document.getElementById('modalOverlay');
   const modalBody = document.getElementById('modalBody');
   const modalClose = document.getElementById('modalClose');
 
-  function openModal(card) {
-    const id = card.dataset.id;
+  function openCareModal(id) {
     const care = careData[id];
-    if (!care) return; // 用品はモーダルなし
-
+    if (!care) return;
+    const card = document.querySelector(`.product-card[data-id="${id}"]`);
     const name = card.querySelector('.product-name').textContent;
     const sci = card.querySelector('.product-scientific').textContent;
-    const cat = card.querySelector('.product-category').textContent;
-    const desc = card.querySelector('.product-desc').textContent;
-    const price = card.querySelector('.product-price').innerHTML;
-    const statusEl = card.querySelector('.product-status');
-    const statusHTML = statusEl ? statusEl.outerHTML : '';
-    const detailsEl = card.querySelector('.product-details');
-    const details = detailsEl ? detailsEl.innerHTML : '';
 
     modalBody.innerHTML = `
-      <span class="modal-category">${cat}</span>
-      <h2 class="modal-name">${name}</h2>
-      <p class="modal-scientific">${sci}</p>
-      <div class="modal-status-price">
-        ${statusHTML}
-        <span class="modal-price">${price}</span>
+      <div class="modal-care-header">
+        <span class="modal-category">飼育環境マニュアル</span>
+        <h2 class="modal-name">${name}</h2>
+        <p class="modal-scientific">${sci}</p>
       </div>
-      <p class="modal-desc">${desc}</p>
-      <div class="product-details" style="margin-bottom:20px">${details}</div>
-      <h3 class="modal-care-title">飼育情報</h3>
-      <div class="modal-care-grid">
-        <div class="modal-care-item"><strong>適温</strong>${care.temp}</div>
-        <div class="modal-care-item"><strong>湿度</strong>${care.humidity}</div>
-        <div class="modal-care-item"><strong>餌</strong>${care.food}</div>
+      <div class="modal-care-basic">
+        <div class="modal-care-item"><strong>原産地</strong>${care.origin}</div>
+        <div class="modal-care-item"><strong>最大サイズ</strong>${care.maxSize}</div>
         <div class="modal-care-item"><strong>寿命</strong>${care.lifespan}</div>
       </div>
-      <p class="modal-desc">${care.notes}</p>
+      <div class="modal-care-section">
+        <h3>ケース</h3>
+        <p>${care.case}</p>
+      </div>
+      <div class="modal-care-section">
+        <h3>床材の配合</h3>
+        <p>${care.substrate}</p>
+      </div>
+      <div class="modal-care-section">
+        <h3>温度</h3>
+        <p>${care.temp}</p>
+      </div>
+      <div class="modal-care-section">
+        <h3>湿度</h3>
+        <p>${care.humidity}</p>
+      </div>
+      <div class="modal-care-section">
+        <h3>餌</h3>
+        <p>${care.food.replace(/\n/g, '<br>')}</p>
+      </div>
+      <div class="modal-care-section">
+        <h3>繁殖</h3>
+        <p>${care.breeding}</p>
+      </div>
+      <div class="modal-care-section">
+        <h3>飼育のコツ・注意点</h3>
+        <p>${care.tips}</p>
+      </div>
       <div class="modal-actions">
-        <a href="#contact" class="modal-cta" id="modalCta">LINEで問い合わせる</a>
+        <a href="#contact" class="modal-cta" onclick="document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow=''">この種について相談する</a>
       </div>
     `;
-
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
-
-    // モーダル内のリンククリックでモーダルを閉じる
-    document.getElementById('modalCta').addEventListener('click', () => closeModal());
+    modalBody.scrollTop = 0;
   }
 
-  function closeModal() {
-    modalOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
+  function closeModal() { modalOverlay.classList.remove('active'); document.body.style.overflow = ''; }
 
-  // 商品カードクリックでモーダルを開く（リンクやボタン以外の部分）
+  // 飼育環境ボタン
+  document.querySelectorAll('.care-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => { e.stopPropagation(); openCareModal(btn.dataset.id); });
+  });
+
+  // カードクリックでもモーダル
   productCards.forEach(card => {
     card.addEventListener('click', (e) => {
       if (e.target.closest('a') || e.target.closest('button')) return;
-      openModal(card);
+      if (careData[card.dataset.id]) openCareModal(card.dataset.id);
     });
-    card.style.cursor = careData[card.dataset.id] ? 'pointer' : 'default';
+    if (careData[card.dataset.id]) card.style.cursor = 'pointer';
   });
 
   modalClose.addEventListener('click', closeModal);
@@ -188,58 +336,47 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
   // --- ご利用案内タブ ---
-  const infoTabs = document.querySelectorAll('.info-tab');
-  const infoPanels = document.querySelectorAll('.info-panel');
-  infoTabs.forEach(tab => {
+  document.querySelectorAll('.info-tab').forEach(tab => {
     tab.addEventListener('click', () => {
-      infoTabs.forEach(t => t.classList.remove('active'));
-      infoPanels.forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.info-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.info-panel').forEach(p => p.classList.remove('active'));
       tab.classList.add('active');
       document.getElementById(tab.dataset.panel).classList.add('active');
     });
   });
 
-  // --- FAQ アコーディオン ---
+  // --- FAQ ---
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
       const wasOpen = item.classList.contains('open');
-      // 他を全部閉じる
       document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
     });
   });
 
   // --- パーティクル ---
-  const particlesContainer = document.getElementById('heroParticles');
-  function createParticle() {
-    const p = document.createElement('div');
-    p.classList.add('particle');
-    const dur = Math.random() * 8 + 6;
-    const delay = Math.random() * 4;
-    p.style.cssText = `left:${Math.random()*100}%;bottom:-10px;width:${Math.random()*2.5+1.5}px;height:${Math.random()*2.5+1.5}px;animation-duration:${dur}s;animation-delay:${delay}s`;
-    particlesContainer.appendChild(p);
-    setTimeout(() => { p.remove(); createParticle(); }, (dur + delay) * 1000);
+  const pc = document.getElementById('heroParticles');
+  function cp() {
+    const p = document.createElement('div'); p.classList.add('particle');
+    const d = Math.random()*8+6, dl = Math.random()*4;
+    p.style.cssText = `left:${Math.random()*100}%;bottom:-10px;width:${Math.random()*2.5+1.5}px;height:${Math.random()*2.5+1.5}px;animation-duration:${d}s;animation-delay:${dl}s`;
+    pc.appendChild(p); setTimeout(() => { p.remove(); cp(); }, (d+dl)*1000);
   }
-  for (let i = 0; i < 12; i++) createParticle();
+  for (let i=0;i<12;i++) cp();
 
   // --- スムーズスクロール ---
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const id = anchor.getAttribute('href');
-      if (id === '#') return;
-      const target = document.querySelector(id);
-      if (target) {
-        e.preventDefault();
-        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - nav.offsetHeight - 32, behavior: 'smooth' });
-      }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href'); if (id === '#') return;
+      const t = document.querySelector(id);
+      if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - nav.offsetHeight - 32, behavior: 'smooth' }); }
     });
   });
 
   // --- LINE固定ボタン ---
-  const lineFloat = document.getElementById('lineFloat');
+  const lf = document.getElementById('lineFloat');
   new IntersectionObserver((entries) => {
-    entries.forEach(entry => lineFloat.classList.toggle('visible', !entry.isIntersecting));
+    entries.forEach(e => lf.classList.toggle('visible', !e.isIntersecting));
   }).observe(document.getElementById('hero'));
-
 });

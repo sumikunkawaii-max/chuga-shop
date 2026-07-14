@@ -541,6 +541,56 @@ img { max-width: 100%; display: block; }
   color: var(--gold);
 }
 
+/* --- 飼育環境ボタン --- */
+.care-btn {
+  width: 100%; margin-top: 10px; padding: 9px;
+  background: transparent;
+  border: 1px solid var(--gold); color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.08em;
+  cursor: pointer; border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.care-btn:hover { background: var(--gold); color: #fff; }
+
+/* --- モーダル内 飼育環境セクション --- */
+.modal-care-header { margin-bottom: 16px; }
+.modal-care-basic {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  margin-bottom: 20px;
+}
+.modal-care-section {
+  margin-bottom: 18px; padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-care-section:last-of-type { border-bottom: none; }
+.modal-care-section h3 {
+  font-family: var(--font-heading);
+  font-size: 0.82rem; font-weight: 500;
+  color: var(--gold); margin-bottom: 6px;
+  letter-spacing: 0.08em;
+}
+.modal-care-section p {
+  font-size: 0.82rem; color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* --- 準備中メッセージ --- */
+.products-empty {
+  text-align: center; padding: 60px 20px;
+  color: var(--text-secondary); font-size: 0.9rem;
+  line-height: 2;
+}
+.products-empty-cta {
+  display: inline-block; margin-top: 16px;
+  padding: 10px 28px;
+  background: var(--gold); color: #fff;
+  font-size: 0.75rem; font-weight: 500;
+  border-radius: 100px; transition: all 0.3s;
+}
+.products-empty-cta:hover { background: var(--gold-dark); }
+
 /* --- 商品ノート --- */
 .products-note {
   text-align: center; margin-top: 32px;
