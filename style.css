@@ -541,6 +541,7 @@ img { max-width: 100%; display: block; }
 
 .product-meta {
   display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
 }
 .product-price {
   font-family: var(--font-display);
@@ -550,17 +551,17 @@ img { max-width: 100%; display: block; }
 .product-price small { font-size: 0.65rem; color: var(--text-muted); }
 
 .product-inquiry {
-  padding: 7px 18px;
+  display: block; width: 100%;
+  padding: 12px;
   background: var(--gold);
   color: #fff;
-  font-size: 0.65rem; font-weight: 500;
-  letter-spacing: 0.05em;
-  border-radius: 100px;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: center;
   transition: all 0.3s ease;
 }
 .product-inquiry:hover {
   background: var(--gold-dark);
-  box-shadow: 0 2px 10px rgba(168, 134, 46, 0.3);
 }
 .product-inquiry.added {
   background: var(--status-instock);
@@ -1277,7 +1278,7 @@ img { max-width: 100%; display: block; }
   .product-scientific { font-size: 0.6rem; margin-bottom: 6px; }
   .product-details { font-size: 0.6rem; gap: 6px; padding: 6px 0; margin-bottom: 8px; }
   .product-price { font-size: 0.95rem; }
-  .product-inquiry { padding: 5px 10px; font-size: 0.58rem; }
+  .product-inquiry { padding: 8px; font-size: 0.65rem; }
   .care-btn { padding: 6px; font-size: 0.62rem; margin-top: 6px; }
   .product-category { font-size: 0.5rem; }
   .product-status { font-size: 0.55rem; }
