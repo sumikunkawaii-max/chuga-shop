@@ -392,13 +392,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- カートに入れるボタン ---
+  // --- カート機能 ---
+  let cartCount = 0;
+  const cartBadge = document.getElementById('cartBadge');
+
+  function updateCartBadge() {
+    if (cartCount > 0) {
+      cartBadge.style.display = 'flex';
+      cartBadge.textContent = cartCount;
+      // バッジのアニメーションを再トリガー
+      cartBadge.style.animation = 'none';
+      cartBadge.offsetHeight;
+      cartBadge.style.animation = '';
+    } else {
+      cartBadge.style.display = 'none';
+    }
+  }
+
   document.querySelectorAll('.product-inquiry:not(.inquiry-notify)').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       if (btn.classList.contains('added')) return;
       btn.classList.add('added');
       btn.textContent = '追加済み';
+      cartCount++;
+      updateCartBadge();
     });
   });
 });
