@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const particle = document.createElement('div');
     particle.classList.add('particle');
     const x = Math.random() * 100;
-    const size = Math.random() * 2 + 1;
+    const size = Math.random() * 2.5 + 1.5;
     const duration = Math.random() * 8 + 6;
     const delay = Math.random() * 4;
     particle.style.left = x + '%';
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, (duration + delay) * 1000);
   }
 
-  for (let i = 0; i < 15; i++) createParticle();
+  for (let i = 0; i < 12; i++) createParticle();
 
   // --- スムーズスクロール ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
