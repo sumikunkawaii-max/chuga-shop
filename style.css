@@ -185,21 +185,40 @@ img { max-width: 100%; display: block; }
 }
 .mobile-menu-links a:hover { color: var(--gold); }
 
-/* --- ヒーロー --- */
+/* --- ヒーロー（高級感強化） --- */
 .hero {
   position: relative; height: 65vh; min-height: 480px;
   margin-top: 32px;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
-  background: linear-gradient(175deg, #f5f1ea 0%, #ebe6db 40%, #e2dcd0 100%);
+  background:
+    linear-gradient(175deg, #f0ece4 0%, #e5dfd5 30%, #d8d0c2 60%, #cfc6b4 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(168,134,46,0.02) 60px, rgba(168,134,46,0.02) 61px),
+    repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(168,134,46,0.02) 60px, rgba(168,134,46,0.02) 61px);
+  z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 80%, rgba(168,134,46,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 20%, rgba(168,134,46,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 70%);
+  z-index: 0;
 }
 .hero-particles { position: absolute; inset: 0; z-index: 0; }
 .hero-overlay {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 30% 30%, rgba(168, 134, 46, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 60%, rgba(168, 134, 46, 0.04) 0%, transparent 60%);
+    radial-gradient(ellipse at 30% 30%, rgba(168, 134, 46, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(168, 134, 46, 0.05) 0%, transparent 60%);
   z-index: 1;
+  border-bottom: 1px solid rgba(168,134,46,0.15);
 }
 .hero-content { position: relative; z-index: 2; text-align: center; }
 
@@ -257,16 +276,19 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.15em; margin-bottom: 32px;
 }
 .hero-cta {
-  display: inline-block; padding: 13px 44px;
-  background: var(--gold); color: #fff;
-  font-size: 0.75rem; font-weight: 500;
-  letter-spacing: 0.15em; border-radius: 2px;
+  display: inline-block; padding: 16px 56px;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark));
+  color: #fff;
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.2em;
+  border: 1px solid rgba(168,134,46,0.3);
   transition: all 0.4s ease;
+  box-shadow: 0 4px 16px rgba(168, 134, 46, 0.2);
 }
 .hero-cta:hover {
-  background: var(--gold-dark);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(168, 134, 46, 0.25);
+  box-shadow: 0 8px 32px rgba(168, 134, 46, 0.35);
 }
 .hero-scroll {
   position: absolute; bottom: 24px; left: 50%;
@@ -402,6 +424,11 @@ img { max-width: 100%; display: block; }
   font-size: 1.8rem; font-weight: 300;
   letter-spacing: 0.2em;
   color: var(--text-muted); opacity: 0.35;
+}
+.product-photo {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  position: absolute; inset: 0;
 }
 .product-sold-overlay {
   position: absolute; inset: 0;
