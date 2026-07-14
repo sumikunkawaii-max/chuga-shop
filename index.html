@@ -12,55 +12,53 @@
 </head>
 <body>
 
-  <!-- ローディング画面 -->
-  <div id="preloader">
-    <div class="preloader-inner">
-      <span class="preloader-text">SELECT INSECTS</span>
-      <div class="preloader-line"></div>
-    </div>
-  </div>
+  <div id="preloader"><div class="preloader-inner"><span class="preloader-text">SELECT INSECTS</span><div class="preloader-line"></div></div></div>
 
-  <!-- ナビゲーション -->
+  <!-- ナビ -->
   <header class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <span class="nav-logo-jp">セレクト昆虫専門店</span>
-      </a>
-      <nav class="nav-links" id="navLinks">
+      <a href="#" class="nav-logo"><span class="nav-logo-jp">セレクト昆虫専門店</span></a>
+      <nav class="nav-links">
         <a href="#products">商品一覧</a>
+        <a href="#ranking">ランキング</a>
         <a href="#starter">初心者セット</a>
-        <a href="#service">サービス</a>
-        <a href="#guide">購入の流れ</a>
+        <a href="#blog">飼育ガイド</a>
+        <a href="#info">ご利用案内</a>
         <a href="#contact">お問い合わせ</a>
       </nav>
       <a href="#contact" class="nav-line-btn">LINEで相談</a>
-      <button class="nav-toggle" id="navToggle" aria-label="メニュー">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="メニュー"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <!-- モバイルメニュー -->
   <div class="mobile-menu" id="mobileMenu">
     <nav class="mobile-menu-links">
-      <a href="#products">商品一覧</a>
-      <a href="#starter">初心者セット</a>
-      <a href="#service">サービス</a>
-      <a href="#guide">購入の流れ</a>
-      <a href="#contact">お問い合わせ</a>
+      <a href="#products">商品一覧</a><a href="#ranking">ランキング</a><a href="#starter">初心者セット</a>
+      <a href="#blog">飼育ガイド</a><a href="#info">ご利用案内</a><a href="#contact">お問い合わせ</a>
     </nav>
   </div>
 
-  <!-- ヒーロー（コンパクト化） -->
+  <!-- ニュースティッカー -->
+  <div class="news-ticker" id="newsTicker">
+    <div class="news-ticker-track">
+      <span>2026.7.14 コバルトブルー入荷しました</span>
+      <span>2026.7.10 マジックポーション在庫追加</span>
+      <span>2026.7.5 夏季配送のご案内を更新</span>
+      <span>2026.7.1 サソリデビューセット販売開始</span>
+      <span>2026.7.14 コバルトブルー入荷しました</span>
+      <span>2026.7.10 マジックポーション在庫追加</span>
+      <span>2026.7.5 夏季配送のご案内を更新</span>
+      <span>2026.7.1 サソリデビューセット販売開始</span>
+    </div>
+  </div>
+
+  <!-- ヒーロー -->
   <section class="hero" id="hero">
     <div class="hero-particles" id="heroParticles"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <a href="#products" class="hero-announcement fade-up">
-        <span class="announcement-badge">NEW</span>
-        コバルトブルー / マジックポーション 他、新入荷しました
+        <span class="announcement-badge">NEW</span>コバルトブルー / マジックポーション 他、新入荷
       </a>
       <h1 class="hero-title fade-up">
         <span class="hero-title-line">セレクト</span>
@@ -70,13 +68,10 @@
       <p class="hero-desc fade-up">厳選された奇蟲を、あなたのもとへ</p>
       <a href="#products" class="hero-cta fade-up">商品を見る</a>
     </div>
-    <div class="hero-scroll">
-      <span>SCROLL</span>
-      <div class="hero-scroll-line"></div>
-    </div>
+    <div class="hero-scroll"><span>SCROLL</span><div class="hero-scroll-line"></div></div>
   </section>
 
-  <!-- 商品一覧（メインセクション・ヒーロー直下） -->
+  <!-- 商品一覧 -->
   <section class="section" id="products">
     <div class="container">
       <div class="section-header fade-up">
@@ -85,7 +80,11 @@
         <div class="section-line"></div>
       </div>
 
-      <!-- カテゴリフィルター -->
+      <div class="search-bar fade-up">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" placeholder="商品名・種名で検索..." id="productSearch">
+      </div>
+
       <div class="filter-tabs fade-up" id="filterTabs">
         <button class="filter-tab active" data-category="all">すべて</button>
         <button class="filter-tab" data-category="tarantula">タランチュラ</button>
@@ -98,670 +97,378 @@
 
       <div class="products-grid" id="productsGrid">
 
-        <!-- 1. グリーンボトルブルー -->
-        <div class="product-card fade-up" data-category="tarantula" data-status="instock">
+        <div class="product-card fade-up" data-category="tarantula" data-status="instock" data-id="gbb">
           <div class="product-image" style="--accent: #1565c0;">
             <span class="product-badge">NEW</span>
+            <button class="fav-btn" data-id="gbb" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">GBB</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">TARANTULA</span>
-              <span class="product-status status-instock">在庫あり</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">TARANTULA</span><span class="product-status status-instock">在庫あり</span></div>
             <h3 class="product-name">グリーンボトルブルー</h3>
             <p class="product-scientific">Chromatopelma cyaneopubescens</p>
             <p class="product-desc">鮮やかなメタリックブルーの体色。飼育しやすく、美しい巣を張る人気種</p>
-            <div class="product-details">
-              <span>体長 約5cm</span>
-              <span>メス</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;8,800</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>体長 約5cm</span><span>メス</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;8,800</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
-        <!-- 2. メキシカンレッドニー -->
-        <div class="product-card fade-up" data-category="tarantula" data-status="instock">
+        <div class="product-card fade-up" data-category="tarantula" data-status="instock" data-id="mrk">
           <div class="product-image" style="--accent: #b71c1c;">
             <span class="product-badge badge-hot">POPULAR</span>
+            <button class="fav-btn" data-id="mrk" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">MRK</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">TARANTULA</span>
-              <span class="product-status status-instock">在庫あり</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">TARANTULA</span><span class="product-status status-instock">在庫あり</span></div>
             <h3 class="product-name">メキシカンレッドニー</h3>
             <p class="product-scientific">Brachypelma hamorii</p>
             <p class="product-desc">黒と赤のコントラストが美しい定番種。温厚で長寿、初めての一匹に最適</p>
-            <div class="product-details">
-              <span>体長 約6cm</span>
-              <span>メス</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;12,000</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>体長 約6cm</span><span>メス</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;12,000</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
-        <!-- 3. コバルトブルー -->
-        <div class="product-card fade-up" data-category="tarantula" data-status="instock">
+        <div class="product-card fade-up" data-category="tarantula" data-status="instock" data-id="cb">
           <div class="product-image" style="--accent: #0d47a1;">
             <span class="product-badge">NEW</span>
+            <button class="fav-btn" data-id="cb" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">CB</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">TARANTULA</span>
-              <span class="product-status status-instock">在庫あり</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">TARANTULA</span><span class="product-status status-instock">在庫あり</span></div>
             <h3 class="product-name">コバルトブルー</h3>
             <p class="product-scientific">Cyriopagopus lividus</p>
             <p class="product-desc">深い青色の体色が宝石のように美しい。やや気性が荒く上級者向け</p>
-            <div class="product-details">
-              <span>体長 約5cm</span>
-              <span>メス</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;15,000</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>体長 約5cm</span><span>メス</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;15,000</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
-        <!-- 4. ゴライアスバードイーター (SOLD OUT) -->
-        <div class="product-card fade-up" data-category="tarantula" data-status="sold">
+        <div class="product-card fade-up" data-category="tarantula" data-status="sold" data-id="glt">
           <div class="product-image" style="--accent: #004d40;">
             <span class="product-badge badge-sold">SOLD OUT</span>
+            <button class="fav-btn" data-id="glt" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-sold-overlay"></div>
             <div class="product-image-inner"><span class="product-silhouette">GLT</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">TARANTULA</span>
-              <span class="product-status status-sold">SOLD OUT</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">TARANTULA</span><span class="product-status status-sold">SOLD OUT</span></div>
             <h3 class="product-name">ゴライアスバードイーター</h3>
             <p class="product-scientific">Theraphosa blondi</p>
             <p class="product-desc">世界最大のタランチュラ。脚を広げると30cmに達する圧倒的サイズ</p>
-            <div class="product-details">
-              <span>体長 約10cm</span>
-              <span>メス</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;35,000</span>
-              <a href="#contact" class="product-inquiry inquiry-notify">再入荷通知</a>
-            </div>
+            <div class="product-details"><span>体長 約10cm</span><span>メス</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;35,000</span><a href="#contact" class="product-inquiry inquiry-notify">再入荷通知</a></div>
           </div>
         </div>
 
-        <!-- 5. エンペラースコーピオン -->
-        <div class="product-card fade-up" data-category="scorpion" data-status="instock">
+        <div class="product-card fade-up" data-category="scorpion" data-status="instock" data-id="emp">
           <div class="product-image" style="--accent: #e65100;">
+            <button class="fav-btn" data-id="emp" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">EMP</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">SCORPION</span>
-              <span class="product-status status-instock">在庫あり</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">SCORPION</span><span class="product-status status-instock">在庫あり</span></div>
             <h3 class="product-name">エンペラースコーピオン</h3>
             <p class="product-scientific">Pandinus imperator</p>
             <p class="product-desc">世界最大級のサソリ。漆黒の装甲と重厚な鋏が圧巻の存在感</p>
-            <div class="product-details">
-              <span>体長 約12cm</span>
-              <span>性別不明</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;8,500</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>体長 約12cm</span><span>性別不明</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;8,500</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
-        <!-- 6. アジアンフォレストスコーピオン -->
-        <div class="product-card fade-up" data-category="scorpion" data-status="instock">
+        <div class="product-card fade-up" data-category="scorpion" data-status="instock" data-id="afs">
           <div class="product-image" style="--accent: #33691e;">
             <span class="product-badge badge-hot">初心者向け</span>
+            <button class="fav-btn" data-id="afs" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">AFS</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">SCORPION</span>
-              <span class="product-status status-instock">在庫あり</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">SCORPION</span><span class="product-status status-instock">在庫あり</span></div>
             <h3 class="product-name">アジアンフォレストスコーピオン</h3>
             <p class="product-scientific">Heterometrus longimanus</p>
             <p class="product-desc">毒性が弱く温厚な性格。サソリ飼育の入門に最適な種</p>
-            <div class="product-details">
-              <span>体長 約10cm</span>
-              <span>性別不明</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;3,800</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>体長 約10cm</span><span>性別不明</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;3,800</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
-        <!-- 7. ベトナムオオムカデ (残り1匹) -->
-        <div class="product-card fade-up" data-category="centipede" data-status="last">
+        <div class="product-card fade-up" data-category="centipede" data-status="last" data-id="vrc">
           <div class="product-image" style="--accent: #880e4f;">
             <span class="product-badge badge-rare">RARE</span>
+            <button class="fav-btn" data-id="vrc" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">VRC</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">CENTIPEDE</span>
-              <span class="product-status status-last">残り1匹</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">CENTIPEDE</span><span class="product-status status-last">残り1匹</span></div>
             <h3 class="product-name">ベトナムオオムカデ レッドレッグ</h3>
             <p class="product-scientific">Scolopendra dehaani</p>
             <p class="product-desc">深紅の脚と暗褐色の体のコントラスト。力強い大型種</p>
-            <div class="product-details">
-              <span>体長 約15cm</span>
-              <span>性別不明</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;6,800</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>体長 約15cm</span><span>性別不明</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;6,800</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
-        <!-- 8. マジックポーション -->
-        <div class="product-card fade-up" data-category="isopod" data-status="instock">
+        <div class="product-card fade-up" data-category="isopod" data-status="instock" data-id="mp">
           <div class="product-image" style="--accent: #6a1b9a;">
             <span class="product-badge">NEW</span>
+            <button class="fav-btn" data-id="mp" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">MP</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">ISOPOD</span>
-              <span class="product-status status-instock">在庫あり</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">ISOPOD</span><span class="product-status status-instock">在庫あり</span></div>
             <h3 class="product-name">マジックポーション</h3>
             <p class="product-scientific">Armadillidium vulgare "Magic Potion"</p>
             <p class="product-desc">紫と橙の幻想的なコントラスト。コレクター人気No.1のワラジムシ</p>
-            <div class="product-details">
-              <span>体長 約1.5cm</span>
-              <span>5匹セット</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;3,800</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>体長 約1.5cm</span><span>5匹セット</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;3,800</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
-        <!-- 9. ゼブラワラジムシ (近日入荷) -->
-        <div class="product-card fade-up" data-category="isopod" data-status="coming">
+        <div class="product-card fade-up" data-category="isopod" data-status="coming" data-id="zb">
           <div class="product-image" style="--accent: #4527a0;">
             <span class="product-badge badge-coming">COMING</span>
+            <button class="fav-btn" data-id="zb" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">ZB</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">ISOPOD</span>
-              <span class="product-status status-coming">近日入荷</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">ISOPOD</span><span class="product-status status-coming">近日入荷</span></div>
             <h3 class="product-name">ゼブラワラジムシ</h3>
             <p class="product-scientific">Armadillidium maculatum</p>
             <p class="product-desc">白と黒のゼブラ模様が美しい人気品種。飼育も容易</p>
-            <div class="product-details">
-              <span>体長 約1.5cm</span>
-              <span>5匹セット</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;2,500</span>
-              <a href="#contact" class="product-inquiry inquiry-notify">入荷通知を受け取る</a>
-            </div>
+            <div class="product-details"><span>体長 約1.5cm</span><span>5匹セット</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;2,500</span><a href="#contact" class="product-inquiry inquiry-notify">入荷通知を受け取る</a></div>
           </div>
         </div>
 
-        <!-- 10. マダガスカルヒッシングコックローチ -->
-        <div class="product-card fade-up" data-category="other" data-status="instock">
+        <div class="product-card fade-up" data-category="other" data-status="instock" data-id="mhc">
           <div class="product-image" style="--accent: #5d4037;">
             <span class="product-badge badge-hot">初心者向け</span>
+            <button class="fav-btn" data-id="mhc" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">MHC</span></div>
+            <div class="product-photo-msg">個体写真はLINEでお送りします</div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">COCKROACH</span>
-              <span class="product-status status-instock">在庫あり</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">COCKROACH</span><span class="product-status status-instock">在庫あり</span></div>
             <h3 class="product-name">マダガスカルヒッシングコックローチ</h3>
             <p class="product-scientific">Gromphadorhina portentosa</p>
             <p class="product-desc">シューシューと鳴く独特の生態。大型で迫力がありお世話も簡単</p>
-            <div class="product-details">
-              <span>体長 約6cm</span>
-              <span>3匹セット</span>
-              <span class="product-difficulty" title="飼育難易度">
-                <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              </span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;1,500</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>体長 約6cm</span><span>3匹セット</span><span class="product-difficulty" title="飼育難易度"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
+            <div class="product-meta"><span class="product-price">&yen;1,500</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
-        <!-- 11. 初心者飼育スターターキット -->
-        <div class="product-card fade-up" data-category="supplies" data-status="instock">
+        <div class="product-card fade-up" data-category="supplies" data-status="instock" data-id="kit">
           <div class="product-image" style="--accent: #424242;">
             <span class="product-badge badge-hot">人気</span>
+            <button class="fav-btn" data-id="kit" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">KIT</span></div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">SUPPLIES</span>
-              <span class="product-status status-instock">在庫あり</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">SUPPLIES</span><span class="product-status status-instock">在庫あり</span></div>
             <h3 class="product-name">飼育スターターキット</h3>
             <p class="product-scientific">ケース + 床材 + 水入れ + ピンセット + ガイド</p>
             <p class="product-desc">初めての飼育に必要なものをすべてセット。生体と同時購入がおすすめ</p>
-            <div class="product-details">
-              <span>全5点セット</span>
-              <span class="product-difficulty" title="飼育難易度">--</span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;4,980</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>全5点セット</span><span class="product-difficulty">--</span></div>
+            <div class="product-meta"><span class="product-price">&yen;4,980</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
-        <!-- 12. 生餌セット -->
-        <div class="product-card fade-up" data-category="supplies" data-status="instock">
+        <div class="product-card fade-up" data-category="supplies" data-status="instock" data-id="feed">
           <div class="product-image" style="--accent: #37474f;">
+            <button class="fav-btn" data-id="feed" aria-label="お気に入り"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
             <div class="product-image-inner"><span class="product-silhouette">FEED</span></div>
           </div>
           <div class="product-info">
-            <div class="product-info-top">
-              <span class="product-category">SUPPLIES</span>
-              <span class="product-status status-instock">在庫あり</span>
-            </div>
+            <div class="product-info-top"><span class="product-category">SUPPLIES</span><span class="product-status status-instock">在庫あり</span></div>
             <h3 class="product-name">生餌セット デュビア50匹</h3>
-            <p class="product-scientific">Blaptica dubia (アルゼンチンモリゴキブリ)</p>
+            <p class="product-scientific">Blaptica dubia</p>
             <p class="product-desc">タランチュラ・サソリの餌に最適。栄養価が高く管理も楽</p>
-            <div class="product-details">
-              <span>M~Lサイズ混合</span>
-              <span class="product-difficulty" title="飼育難易度">--</span>
-            </div>
-            <div class="product-meta">
-              <span class="product-price">&yen;1,200</span>
-              <a href="#contact" class="product-inquiry">問い合わせる</a>
-            </div>
+            <div class="product-details"><span>M~Lサイズ混合</span><span class="product-difficulty">--</span></div>
+            <div class="product-meta"><span class="product-price">&yen;1,200</span><a href="#contact" class="product-inquiry">問い合わせる</a></div>
           </div>
         </div>
 
       </div>
+      <p class="products-note">※ 在庫は随時変動します。最新の在庫状況はLINEでお問い合わせください。</p>
     </div>
   </section>
 
-  <!-- 人気ランキング -->
+  <!-- ランキング -->
   <section class="section section-alt" id="ranking">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-label">RANKING</span>
-        <h2 class="section-title">人気ランキング</h2>
-        <div class="section-line"></div>
-      </div>
+      <div class="section-header fade-up"><span class="section-label">RANKING</span><h2 class="section-title">人気ランキング</h2><div class="section-line"></div></div>
       <div class="ranking-list">
-        <div class="ranking-item fade-up">
-          <div class="ranking-medal medal-gold">1</div>
-          <div class="ranking-body">
-            <span class="ranking-category">TARANTULA</span>
-            <h3 class="ranking-name">メキシカンレッドニー</h3>
-            <p class="ranking-reason">初心者からベテランまで不動の人気No.1。温厚・丈夫・長寿の三拍子</p>
-          </div>
-          <div class="ranking-right">
-            <span class="ranking-price">&yen;12,000</span>
-            <a href="#contact" class="ranking-btn">問い合わせる</a>
-          </div>
-        </div>
-        <div class="ranking-item fade-up">
-          <div class="ranking-medal medal-silver">2</div>
-          <div class="ranking-body">
-            <span class="ranking-category">TARANTULA</span>
-            <h3 class="ranking-name">グリーンボトルブルー</h3>
-            <p class="ranking-reason">鮮やかなメタリックブルーの体色で人気急上昇中。飼育も容易</p>
-          </div>
-          <div class="ranking-right">
-            <span class="ranking-price">&yen;8,800</span>
-            <a href="#contact" class="ranking-btn">問い合わせる</a>
-          </div>
-        </div>
-        <div class="ranking-item fade-up">
-          <div class="ranking-medal medal-bronze">3</div>
-          <div class="ranking-body">
-            <span class="ranking-category">ISOPOD</span>
-            <h3 class="ranking-name">マジックポーション</h3>
-            <p class="ranking-reason">手軽に始められるワラジムシの王道。紫と橙の幻想的な色彩が人気</p>
-          </div>
-          <div class="ranking-right">
-            <span class="ranking-price">&yen;3,800</span>
-            <a href="#contact" class="ranking-btn">問い合わせる</a>
-          </div>
-        </div>
-        <div class="ranking-item fade-up">
-          <div class="ranking-medal">4</div>
-          <div class="ranking-body">
-            <span class="ranking-category">SCORPION</span>
-            <h3 class="ranking-name">アジアンフォレストスコーピオン</h3>
-            <p class="ranking-reason">低価格かつ温厚で入門サソリの定番。毒性も弱く安心</p>
-          </div>
-          <div class="ranking-right">
-            <span class="ranking-price">&yen;3,800</span>
-            <a href="#contact" class="ranking-btn">問い合わせる</a>
-          </div>
-        </div>
-        <div class="ranking-item fade-up">
-          <div class="ranking-medal">5</div>
-          <div class="ranking-body">
-            <span class="ranking-category">SCORPION</span>
-            <h3 class="ranking-name">エンペラースコーピオン</h3>
-            <p class="ranking-reason">世界最大級の迫力で根強い人気。漆黒の装甲がコレクター心をくすぐる</p>
-          </div>
-          <div class="ranking-right">
-            <span class="ranking-price">&yen;8,500</span>
-            <a href="#contact" class="ranking-btn">問い合わせる</a>
-          </div>
-        </div>
+        <div class="ranking-item fade-up"><div class="ranking-medal medal-gold">1</div><div class="ranking-body"><span class="ranking-category">TARANTULA</span><h3 class="ranking-name">メキシカンレッドニー</h3><p class="ranking-reason">初心者からベテランまで不動の人気No.1。温厚・丈夫・長寿の三拍子</p></div><div class="ranking-right"><span class="ranking-price">&yen;12,000</span><a href="#contact" class="ranking-btn">問い合わせる</a></div></div>
+        <div class="ranking-item fade-up"><div class="ranking-medal medal-silver">2</div><div class="ranking-body"><span class="ranking-category">TARANTULA</span><h3 class="ranking-name">グリーンボトルブルー</h3><p class="ranking-reason">鮮やかなメタリックブルーの体色で人気急上昇中。飼育も容易</p></div><div class="ranking-right"><span class="ranking-price">&yen;8,800</span><a href="#contact" class="ranking-btn">問い合わせる</a></div></div>
+        <div class="ranking-item fade-up"><div class="ranking-medal medal-bronze">3</div><div class="ranking-body"><span class="ranking-category">ISOPOD</span><h3 class="ranking-name">マジックポーション</h3><p class="ranking-reason">手軽に始められるワラジムシの王道。紫と橙の幻想的な色彩が人気</p></div><div class="ranking-right"><span class="ranking-price">&yen;3,800</span><a href="#contact" class="ranking-btn">問い合わせる</a></div></div>
+        <div class="ranking-item fade-up"><div class="ranking-medal">4</div><div class="ranking-body"><span class="ranking-category">SCORPION</span><h3 class="ranking-name">アジアンフォレストスコーピオン</h3><p class="ranking-reason">低価格かつ温厚で入門サソリの定番。毒性も弱く安心</p></div><div class="ranking-right"><span class="ranking-price">&yen;3,800</span><a href="#contact" class="ranking-btn">問い合わせる</a></div></div>
+        <div class="ranking-item fade-up"><div class="ranking-medal">5</div><div class="ranking-body"><span class="ranking-category">SCORPION</span><h3 class="ranking-name">エンペラースコーピオン</h3><p class="ranking-reason">世界最大級の迫力で根強い人気。漆黒の装甲がコレクター心をくすぐる</p></div><div class="ranking-right"><span class="ranking-price">&yen;8,500</span><a href="#contact" class="ranking-btn">問い合わせる</a></div></div>
       </div>
     </div>
   </section>
 
-  <!-- 初心者セット（コンバージョン特化） -->
+  <!-- 初心者セット -->
   <section class="section section-dark" id="starter">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-label">STARTER SET</span>
-        <h2 class="section-title">はじめての方へ -- デビューセット</h2>
-        <div class="section-line"></div>
-        <p class="section-sub">生体＋飼育に必要なもの全部入り。届いたその日から飼育を始められます。</p>
-      </div>
+      <div class="section-header fade-up"><span class="section-label">STARTER SET</span><h2 class="section-title">はじめての方へ -- デビューセット</h2><div class="section-line"></div><p class="section-sub">生体＋飼育に必要なもの全部入り。届いたその日から飼育を始められます。</p></div>
       <div class="starter-grid">
-        <div class="starter-card fade-up">
-          <div class="starter-header">
-            <span class="starter-label">一番人気</span>
-            <h3>タランチュラデビューセット</h3>
-          </div>
-          <div class="starter-body">
-            <ul class="starter-includes">
-              <li>メキシカンレッドニー 1匹</li>
-              <li>飼育ケース</li>
-              <li>床材（ヤシガラ）</li>
-              <li>水入れ + ピンセット</li>
-              <li>飼育ガイド（PDF）</li>
-            </ul>
-            <div class="starter-pricing">
-              <span class="starter-original">&yen;18,200</span>
-              <span class="starter-price">&yen;15,800</span>
-            </div>
-            <a href="#contact" class="starter-cta">セットで問い合わせる</a>
-          </div>
-        </div>
-        <div class="starter-card fade-up">
-          <div class="starter-header">
-            <span class="starter-label">コスパ最強</span>
-            <h3>サソリデビューセット</h3>
-          </div>
-          <div class="starter-body">
-            <ul class="starter-includes">
-              <li>アジアンフォレストスコーピオン 1匹</li>
-              <li>飼育ケース</li>
-              <li>床材（ヤシガラ）</li>
-              <li>水入れ + ピンセット</li>
-              <li>飼育ガイド（PDF）</li>
-            </ul>
-            <div class="starter-pricing">
-              <span class="starter-original">&yen;10,600</span>
-              <span class="starter-price">&yen;8,800</span>
-            </div>
-            <a href="#contact" class="starter-cta">セットで問い合わせる</a>
-          </div>
-        </div>
-        <div class="starter-card fade-up">
-          <div class="starter-header">
-            <span class="starter-label">お手軽</span>
-            <h3>ミニ生体デビューセット</h3>
-          </div>
-          <div class="starter-body">
-            <ul class="starter-includes">
-              <li>マジックポーション 5匹</li>
-              <li>飼育ケース</li>
-              <li>床材（腐葉土ミックス）</li>
-              <li>餌（落ち葉・野菜くず可）</li>
-              <li>飼育ガイド（PDF）</li>
-            </ul>
-            <div class="starter-pricing">
-              <span class="starter-original">&yen;8,200</span>
-              <span class="starter-price">&yen;6,800</span>
-            </div>
-            <a href="#contact" class="starter-cta">セットで問い合わせる</a>
-          </div>
-        </div>
+        <div class="starter-card fade-up"><div class="starter-header"><span class="starter-label">一番人気</span><h3>タランチュラデビューセット</h3></div><div class="starter-body"><ul class="starter-includes"><li>メキシカンレッドニー 1匹</li><li>飼育ケース</li><li>床材（ヤシガラ）</li><li>水入れ + ピンセット</li><li>飼育ガイド（PDF）</li></ul><div class="starter-pricing"><span class="starter-original">&yen;18,200</span><span class="starter-price">&yen;15,800</span></div><a href="#contact" class="starter-cta">セットで問い合わせる</a></div></div>
+        <div class="starter-card fade-up"><div class="starter-header"><span class="starter-label">コスパ最強</span><h3>サソリデビューセット</h3></div><div class="starter-body"><ul class="starter-includes"><li>アジアンフォレストスコーピオン 1匹</li><li>飼育ケース</li><li>床材（ヤシガラ）</li><li>水入れ + ピンセット</li><li>飼育ガイド（PDF）</li></ul><div class="starter-pricing"><span class="starter-original">&yen;10,600</span><span class="starter-price">&yen;8,800</span></div><a href="#contact" class="starter-cta">セットで問い合わせる</a></div></div>
+        <div class="starter-card fade-up"><div class="starter-header"><span class="starter-label">お手軽</span><h3>ミニ生体デビューセット</h3></div><div class="starter-body"><ul class="starter-includes"><li>マジックポーション 5匹</li><li>飼育ケース</li><li>床材（腐葉土ミックス）</li><li>餌（落ち葉・野菜くず可）</li><li>飼育ガイド（PDF）</li></ul><div class="starter-pricing"><span class="starter-original">&yen;8,200</span><span class="starter-price">&yen;6,800</span></div><a href="#contact" class="starter-cta">セットで問い合わせる</a></div></div>
       </div>
     </div>
   </section>
 
-  <!-- サービス（コンパクト化） -->
-  <section class="section" id="service">
+  <!-- 飼育ガイド/ブログ -->
+  <section class="section" id="blog">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-label">SERVICE</span>
-        <h2 class="section-title">4つの安心</h2>
-        <div class="section-line"></div>
+      <div class="section-header fade-up"><span class="section-label">CARE GUIDE</span><h2 class="section-title">飼育ガイド</h2><div class="section-line"></div></div>
+      <div class="blog-grid">
+        <article class="blog-card fade-up">
+          <div class="blog-image" style="--bg: #dce8f0;"></div>
+          <div class="blog-info">
+            <span class="blog-tag">BEGINNER</span>
+            <h3>初めてのタランチュラ飼育ガイド</h3>
+            <p>準備するものから日常管理まで。初心者が押さえるべきポイントを完全解説</p>
+            <span class="blog-more">もっと読む &rarr;</span>
+          </div>
+        </article>
+        <article class="blog-card fade-up">
+          <div class="blog-image" style="--bg: #e8dff0;"></div>
+          <div class="blog-info">
+            <span class="blog-tag">COLUMN</span>
+            <h3>ワラジムシの魅力 -- コレクター急増の理由</h3>
+            <p>なぜ今ワラジムシが注目されているのか？品種の多様性と飼育の手軽さに迫る</p>
+            <span class="blog-more">もっと読む &rarr;</span>
+          </div>
+        </article>
+        <article class="blog-card fade-up">
+          <div class="blog-image" style="--bg: #f0e8dc;"></div>
+          <div class="blog-info">
+            <span class="blog-tag">CARE GUIDE</span>
+            <h3>季節別・奇蟲の温度管理術</h3>
+            <p>夏と冬で変わるケアのポイント。エアコン・ヒーター・保冷剤の使い分けを解説</p>
+            <span class="blog-more">もっと読む &rarr;</span>
+          </div>
+        </article>
       </div>
+    </div>
+  </section>
+
+  <!-- サービス -->
+  <section class="section section-alt" id="service">
+    <div class="container">
+      <div class="section-header fade-up"><span class="section-label">SERVICE</span><h2 class="section-title">4つの安心</h2><div class="section-line"></div></div>
       <div class="service-grid">
-        <div class="service-card fade-up">
-          <div class="service-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M24 4L6 14v20l18 10 18-10V14L24 4z"/>
-              <path d="M24 24v20M6 14l18 10 18-10"/>
-            </svg>
-          </div>
-          <h3>死着保証</h3>
-          <p>到着時に生体が死亡していた場合、24時間以内のご連絡で同種個体と交換</p>
-        </div>
-        <div class="service-card fade-up">
-          <div class="service-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="24" cy="24" r="18"/>
-              <path d="M16 24h16M24 16v16"/>
-            </svg>
-          </div>
-          <h3>温度管理配送</h3>
-          <p>夏はクール便、冬はカイロ同梱。季節に応じた最適な温度管理で安全にお届け</p>
-        </div>
-        <div class="service-card fade-up">
-          <div class="service-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M8 38V18l16-12 16 12v20H8z"/>
-              <path d="M18 38V28h12v10"/>
-            </svg>
-          </div>
-          <h3>飼育サポート</h3>
-          <p>購入後もLINEで飼育相談OK。温度管理、餌やり、脱皮ケアまでサポート</p>
-        </div>
-        <div class="service-card fade-up">
-          <div class="service-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M24 4l6 12h14l-11 8 4 14-13-9-13 9 4-14L4 16h14z"/>
-            </svg>
-          </div>
-          <h3>厳選個体のみ</h3>
-          <p>健康状態・発色・活性を厳しく検査。基準をクリアした個体だけを販売</p>
-        </div>
+        <div class="service-card fade-up"><div class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4L6 14v20l18 10 18-10V14L24 4z"/><path d="M24 24v20M6 14l18 10 18-10"/></svg></div><h3>死着保証</h3><p>到着時に生体が死亡していた場合、24時間以内のご連絡で同種個体と交換</p></div>
+        <div class="service-card fade-up"><div class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="18"/><path d="M16 24h16M24 16v16"/></svg></div><h3>温度管理配送</h3><p>夏はクール便、冬はカイロ同梱。季節に応じた最適な温度管理で安全にお届け</p></div>
+        <div class="service-card fade-up"><div class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 38V18l16-12 16 12v20H8z"/><path d="M18 38V28h12v10"/></svg></div><h3>飼育サポート</h3><p>購入後もLINEで飼育相談OK。温度管理、餌やり、脱皮ケアまでサポート</p></div>
+        <div class="service-card fade-up"><div class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4l6 12h14l-11 8 4 14-13-9-13 9 4-14L4 16h14z"/></svg></div><h3>厳選個体のみ</h3><p>健康状態・発色・活性を厳しく検査。基準をクリアした個体だけを販売</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 購入ガイド（3ステップに簡素化） -->
-  <section class="section section-dark" id="guide">
+  <!-- ご利用案内（タブ: 購入の流れ / FAQ / 送料） -->
+  <section class="section section-dark" id="info">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-label">GUIDE</span>
-        <h2 class="section-title">購入はかんたん3ステップ</h2>
-        <div class="section-line"></div>
+      <div class="section-header fade-up"><span class="section-label">INFORMATION</span><h2 class="section-title">ご利用案内</h2><div class="section-line"></div></div>
+      <div class="info-tabs fade-up">
+        <button class="info-tab active" data-panel="panel-guide">購入の流れ</button>
+        <button class="info-tab" data-panel="panel-faq">よくある質問</button>
+        <button class="info-tab" data-panel="panel-shipping">送料・配送</button>
       </div>
-      <div class="guide-steps">
-        <div class="guide-step fade-up">
-          <div class="guide-step-num">01</div>
-          <div class="guide-step-content">
-            <h3>LINEで問い合わせ</h3>
-            <p>気になる商品が見つかったら、LINEまたはInstagram DMでお問い合わせ。在庫確認・飼育相談もこちらから。</p>
-          </div>
+      <!-- 購入の流れ -->
+      <div class="info-panel active" id="panel-guide">
+        <div class="guide-steps">
+          <div class="guide-step"><div class="guide-step-num">01</div><div class="guide-step-content"><h3>LINEで問い合わせ</h3><p>気になる商品の在庫確認・飼育相談をLINEまたはInstagram DMで受付中。</p></div></div>
+          <div class="guide-step"><div class="guide-step-num">02</div><div class="guide-step-content"><h3>お支払い</h3><p>銀行振込またはPayPayでお支払い。ご入金確認後、発送日をご相談します。</p></div></div>
+          <div class="guide-step"><div class="guide-step-num">03</div><div class="guide-step-content"><h3>温度管理配送でお届け</h3><p>季節に応じた梱包で発送。到着日時の指定OK。届いたらすぐに飼育スタート。</p></div></div>
         </div>
-        <div class="guide-step fade-up">
-          <div class="guide-step-num">02</div>
-          <div class="guide-step-content">
-            <h3>お支払い</h3>
-            <p>銀行振込またはPayPayでお支払い。ご入金確認後、発送日をご相談します。</p>
-          </div>
+      </div>
+      <!-- FAQ -->
+      <div class="info-panel" id="panel-faq">
+        <div class="faq-list">
+          <div class="faq-item"><button class="faq-q">毒はありますか？危険ではないですか？</button><div class="faq-a"><p>タランチュラやサソリには毒がありますが、当店で扱う種は人体に重大な影響を及ぼすものではありません。ただし個体によっては噛むことがあるため、直接手で触れることは推奨しません。ピンセットでの取り扱いを推奨しています。</p></div></div>
+          <div class="faq-item"><button class="faq-q">配送中に死んでしまわないですか？</button><div class="faq-a"><p>季節に応じた温度管理（夏はクール便、冬はカイロ同梱）と衝撃対策を行っています。万が一の死着には保証制度がありますのでご安心ください。</p></div></div>
+          <div class="faq-item"><button class="faq-q">初めてでも飼えますか？</button><div class="faq-a"><p>もちろんです。各商品に飼育難易度を表示しています。星1-2の種は初心者でも安心して飼育できます。飼育ガイドPDFの提供やLINEでの飼育相談も行っています。</p></div></div>
+          <div class="faq-item"><button class="faq-q">餌は何をあげればいいですか？</button><div class="faq-a"><p>タランチュラ・サソリ・ムカデにはコオロギやデュビア（餌用ゴキブリ）を与えます。ワラジムシ・ダンゴムシは落ち葉や野菜くずでOKです。当店で生餌セットも販売しています。</p></div></div>
+          <div class="faq-item"><button class="faq-q">脱走しませんか？</button><div class="faq-a"><p>適切な飼育ケースを使用すれば脱走の心配はほぼありません。蓋がしっかり閉まるケースを使い、換気口は生体が通れないサイズのものを選んでください。当店のスターターキットにはすべて対策済みのケースが含まれています。</p></div></div>
+          <div class="faq-item"><button class="faq-q">生体の返品・交換はできますか？</button><div class="faq-a"><p>生体という性質上、お客様都合での返品・交換は承っておりません。ただし、死着保証制度により、到着後24時間以内にご連絡・写真提出いただければ同種個体と交換いたします。</p></div></div>
         </div>
-        <div class="guide-step fade-up">
-          <div class="guide-step-num">03</div>
-          <div class="guide-step-content">
-            <h3>温度管理配送でお届け</h3>
-            <p>季節に応じた梱包で発送。到着日時の指定OK。届いたらすぐに飼育スタート。</p>
+      </div>
+      <!-- 送料 -->
+      <div class="info-panel" id="panel-shipping">
+        <div class="shipping-content">
+          <table class="shipping-table">
+            <thead><tr><th>地域</th><th>送料（税込）</th></tr></thead>
+            <tbody>
+              <tr><td>関東</td><td>&yen;1,200</td></tr>
+              <tr><td>信越・北陸・中部</td><td>&yen;1,300</td></tr>
+              <tr><td>関西</td><td>&yen;1,400</td></tr>
+              <tr><td>中国・四国</td><td>&yen;1,500</td></tr>
+              <tr><td>九州</td><td>&yen;1,600</td></tr>
+              <tr><td>北海道</td><td>&yen;1,800</td></tr>
+              <tr><td>沖縄・離島</td><td>&yen;2,500</td></tr>
+            </tbody>
+          </table>
+          <div class="shipping-notes">
+            <p><strong>夏季クール便:</strong> +&yen;300（6月-9月）</p>
+            <p><strong>冬季カイロ同梱:</strong> 無料（11月-3月）</p>
+            <p><strong>配送業者:</strong> ヤマト運輸</p>
+            <p><strong>お届け日数:</strong> ご入金確認後、1-3営業日で発送</p>
+            <p><strong>時間指定:</strong> 午前中 / 14-16時 / 16-18時 / 18-20時 / 19-21時</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- お客様の声・実績 -->
+  <!-- お客様の声 -->
   <section class="section" id="reviews">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-label">REVIEWS</span>
-        <h2 class="section-title">お客様の声</h2>
-        <div class="section-line"></div>
-      </div>
-      <!-- 実績数値 -->
+      <div class="section-header fade-up"><span class="section-label">REVIEWS</span><h2 class="section-title">お客様の声</h2><div class="section-line"></div></div>
       <div class="stats-bar fade-up">
-        <div class="stat-item">
-          <span class="stat-num">500+</span>
-          <span class="stat-label">発送実績</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">80+</span>
-          <span class="stat-label">取扱い種数</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">72%</span>
-          <span class="stat-label">リピート率</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">24h</span>
-          <span class="stat-label">LINE対応</span>
-        </div>
+        <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">発送実績</span></div>
+        <div class="stat-item"><span class="stat-num">80+</span><span class="stat-label">取扱い種数</span></div>
+        <div class="stat-item"><span class="stat-num">72%</span><span class="stat-label">リピート率</span></div>
+        <div class="stat-item"><span class="stat-num">24h</span><span class="stat-label">LINE対応</span></div>
       </div>
-      <!-- レビュー -->
       <div class="reviews-grid fade-up">
-        <div class="review-card">
-          <div class="review-stars">
-            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-          </div>
-          <p class="review-text">初めての奇蟲でしたが、梱包も丁寧で安心しました。飼育相談にも素早く対応していただけて助かりました。</p>
-          <span class="review-author">T.K 様（東京都）</span>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">
-            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-          </div>
-          <p class="review-text">メキシカンレッドニーの発色が最高でした。個体選定のセンスが素晴らしいです。リピート確定です。</p>
-          <span class="review-author">S.M 様（大阪府）</span>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">
-            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-          </div>
-          <p class="review-text">冬場の注文でしたが、カイロ同梱でしっかり温度管理されていて、元気な状態で届きました。</p>
-          <span class="review-author">Y.H 様（北海道）</span>
-        </div>
+        <div class="review-card"><div class="review-stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div><p class="review-text">初めての奇蟲でしたが、梱包も丁寧で安心しました。飼育相談にも素早く対応していただけて助かりました。</p><span class="review-author">T.K 様（東京都）</span></div>
+        <div class="review-card"><div class="review-stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div><p class="review-text">メキシカンレッドニーの発色が最高でした。個体選定のセンスが素晴らしいです。リピート確定です。</p><span class="review-author">S.M 様（大阪府）</span></div>
+        <div class="review-card"><div class="review-stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div><p class="review-text">冬場の注文でしたが、カイロ同梱でしっかり温度管理されていて、元気な状態で届きました。</p><span class="review-author">Y.H 様（北海道）</span></div>
       </div>
     </div>
   </section>
 
   <!-- お問い合わせ -->
-  <section class="section section-dark" id="contact">
+  <section class="section section-alt" id="contact">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-label">CONTACT</span>
-        <h2 class="section-title">お問い合わせ</h2>
-        <div class="section-line"></div>
-      </div>
+      <div class="section-header fade-up"><span class="section-label">CONTACT</span><h2 class="section-title">お問い合わせ</h2><div class="section-line"></div></div>
       <div class="contact-body fade-up">
         <p class="contact-lead">在庫確認・ご質問・飼育相談など、お気軽にお問い合わせください。</p>
         <div class="contact-links">
           <a href="#" class="contact-link contact-link-primary">
-            <div class="contact-link-icon">
-              <svg viewBox="0 0 48 48" fill="currentColor">
-                <path d="M42 12.5c0-5.8-8.1-10.5-18-10.5S6 6.7 6 12.5c0 5.2 6.2 9.5 14.5 10.3.6.1 1.3.4 1.5.8.2.4.1 1-.1 1.5l-.5 2.8c-.1.5-.3 1.8 1.6 1 1.9-.8 10.1-5.9 13.8-10.2C39.6 15.7 42 14.3 42 12.5z"/>
-              </svg>
-            </div>
-            <div>
-              <span class="contact-link-label">LINE公式アカウント（推奨）</span>
-              <span class="contact-link-id">@select_insects</span>
-            </div>
+            <div class="contact-link-icon"><svg viewBox="0 0 48 48" fill="currentColor"><path d="M42 12.5c0-5.8-8.1-10.5-18-10.5S6 6.7 6 12.5c0 5.2 6.2 9.5 14.5 10.3.6.1 1.3.4 1.5.8.2.4.1 1-.1 1.5l-.5 2.8c-.1.5-.3 1.8 1.6 1 1.9-.8 10.1-5.9 13.8-10.2C39.6 15.7 42 14.3 42 12.5z"/></svg></div>
+            <div><span class="contact-link-label">LINE公式アカウント（推奨）</span><span class="contact-link-id">@select_insects</span></div>
           </a>
           <a href="#" class="contact-link">
-            <div class="contact-link-icon">
-              <svg viewBox="0 0 48 48" fill="currentColor">
-                <path d="M24 4C12.96 4 4 12.96 4 24s8.96 20 20 20 20-8.96 20-20S35.04 4 24 4zm10 13.2c-.08 3.48-2.56 8.28-7.48 14.4-5.08 6.36-9.36 9.56-12.88 9.56-2.16 0-4-2-5.52-6l-3-11.12c-1.12-4-.64-6 1.44-6 .8 0 2.28.88 4.4 2.64L14 24c2.64-7.04 5.48-10.56 8.48-10.56 2 0 3.16 1.08 3.44 3.24-.56 3.44-1.8 7.24-1.8 7.24s-.56 1.84.84 1.84c1.08 0 3.24-1.76 5.48-4.52.56-.68 1-1.12 1-1.12s.28-.52-.16-.52h-1.6s-.44-.04-.16-.52c.28-.48 2.4-.8 3.44-.8 2.04 0 2.92.6 2.84 1.4z"/>
-              </svg>
-            </div>
-            <div>
-              <span class="contact-link-label">Instagram</span>
-              <span class="contact-link-id">@select_insects</span>
-            </div>
+            <div class="contact-link-icon"><svg viewBox="0 0 48 48" fill="currentColor"><path d="M24 4C12.96 4 4 12.96 4 24s8.96 20 20 20 20-8.96 20-20S35.04 4 24 4zm10 13.2c-.08 3.48-2.56 8.28-7.48 14.4-5.08 6.36-9.36 9.56-12.88 9.56-2.16 0-4-2-5.52-6l-3-11.12c-1.12-4-.64-6 1.44-6 .8 0 2.28.88 4.4 2.64L14 24c2.64-7.04 5.48-10.56 8.48-10.56 2 0 3.16 1.08 3.44 3.24-.56 3.44-1.8 7.24-1.8 7.24s-.56 1.84.84 1.84c1.08 0 3.24-1.76 5.48-4.52.56-.68 1-1.12 1-1.12s.28-.52-.16-.52h-1.6s-.44-.04-.16-.52c.28-.48 2.4-.8 3.44-.8 2.04 0 2.92.6 2.84 1.4z"/></svg></div>
+            <div><span class="contact-link-label">Instagram</span><span class="contact-link-id">@select_insects</span></div>
           </a>
           <a href="#" class="contact-link">
-            <div class="contact-link-icon">
-              <svg viewBox="0 0 48 48" fill="currentColor">
-                <path d="M36.6 18.3c0-.3 0-.6 0-.9C36.6 10.6 30 5 21.6 5 13.2 5 6.6 10.6 6.6 17.4c0 6.8 6.6 12.4 15 12.4.6 0 1.2 0 1.8-.1l5.4 3-.9-4.2c5.2-2.4 8.7-6.4 8.7-10.2zM16.2 16.2c-1.2 0-2.1-.9-2.1-2.1s.9-2.1 2.1-2.1 2.1.9 2.1 2.1-.9 2.1-2.1 2.1zM27 16.2c-1.2 0-2.1-.9-2.1-2.1s.9-2.1 2.1-2.1 2.1.9 2.1 2.1-.9 2.1-2.1 2.1z"/>
-                <path d="M42 25.2c0-4.8-4.8-8.7-10.8-8.7h-.6c.6 1.5.6 3 .6 4.5 0 7.8-7.5 14.1-16.8 14.1-.6 0-1.5 0-2.1-.3 2.7 4.2 8.1 6.9 14.1 6.9.6 0 1.2 0 1.8-.1l5.4 3-.9-4.2C38.1 37.8 42 33.6 42 28.8v-3.6z"/>
-              </svg>
-            </div>
-            <div>
-              <span class="contact-link-label">X (Twitter)</span>
-              <span class="contact-link-id">@select_insects</span>
-            </div>
+            <div class="contact-link-icon"><svg viewBox="0 0 48 48" fill="currentColor"><path d="M36.6 18.3v-.9C36.6 10.6 30 5 21.6 5S6.6 10.6 6.6 17.4c0 6.8 6.6 12.4 15 12.4.6 0 1.2 0 1.8-.1l5.4 3-.9-4.2c5.2-2.4 8.7-6.4 8.7-10.2zM16.2 16.2a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM27 16.2a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2z"/><path d="M42 25.2c0-4.8-4.8-8.7-10.8-8.7h-.6c.6 1.5.6 3 .6 4.5 0 7.8-7.5 14.1-16.8 14.1-.6 0-1.5 0-2.1-.3 2.7 4.2 8.1 6.9 14.1 6.9.6 0 1.2 0 1.8-.1l5.4 3-.9-4.2c5.4-2.6 8.7-6.8 8.7-11.6v-3.6z"/></svg></div>
+            <div><span class="contact-link-label">X (Twitter)</span><span class="contact-link-id">@select_insects</span></div>
           </a>
         </div>
       </div>
@@ -772,42 +479,28 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
-        <div class="footer-brand">
-          <span class="footer-logo-jp">セレクト昆虫専門店</span>
-          <span class="footer-logo-en">SELECT INSECTS</span>
-          <p class="footer-tagline">Exotic Arthropod Boutique</p>
-        </div>
+        <div class="footer-brand"><span class="footer-logo-jp">セレクト昆虫専門店</span><span class="footer-logo-en">SELECT INSECTS</span><p class="footer-tagline">Exotic Arthropod Boutique</p></div>
         <div class="footer-nav">
-          <div class="footer-nav-col">
-            <h4>SHOP</h4>
-            <a href="#products">商品一覧</a>
-            <a href="#starter">初心者セット</a>
-            <a href="#guide">購入の流れ</a>
-          </div>
-          <div class="footer-nav-col">
-            <h4>INFO</h4>
-            <a href="#service">サービス</a>
-            <a href="#reviews">お客様の声</a>
-            <a href="#contact">お問い合わせ</a>
-          </div>
-          <div class="footer-nav-col">
-            <h4>LEGAL</h4>
-            <a href="#">特定商取引法に基づく表記</a>
-            <a href="#">プライバシーポリシー</a>
-          </div>
+          <div class="footer-nav-col"><h4>SHOP</h4><a href="#products">商品一覧</a><a href="#ranking">ランキング</a><a href="#starter">初心者セット</a></div>
+          <div class="footer-nav-col"><h4>INFO</h4><a href="#blog">飼育ガイド</a><a href="#service">サービス</a><a href="#info">ご利用案内</a></div>
+          <div class="footer-nav-col"><h4>LEGAL</h4><a href="#">特定商取引法に基づく表記</a><a href="#">プライバシーポリシー</a></div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 セレクト昆虫専門店 SELECT INSECTS. All rights reserved.</p>
-      </div>
+      <div class="footer-bottom"><p>&copy; 2026 セレクト昆虫専門店 SELECT INSECTS. All rights reserved.</p></div>
     </div>
   </footer>
 
+  <!-- 商品詳細モーダル -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
   <!-- LINE固定ボタン -->
   <a href="#contact" class="line-float" id="lineFloat">
-    <svg viewBox="0 0 48 48" fill="currentColor" width="24" height="24">
-      <path d="M42 12.5c0-5.8-8.1-10.5-18-10.5S6 6.7 6 12.5c0 5.2 6.2 9.5 14.5 10.3.6.1 1.3.4 1.5.8.2.4.1 1-.1 1.5l-.5 2.8c-.1.5-.3 1.8 1.6 1 1.9-.8 10.1-5.9 13.8-10.2C39.6 15.7 42 14.3 42 12.5z"/>
-    </svg>
+    <svg viewBox="0 0 48 48" fill="currentColor" width="22" height="22"><path d="M42 12.5c0-5.8-8.1-10.5-18-10.5S6 6.7 6 12.5c0 5.2 6.2 9.5 14.5 10.3.6.1 1.3.4 1.5.8.2.4.1 1-.1 1.5l-.5 2.8c-.1.5-.3 1.8 1.6 1 1.9-.8 10.1-5.9 13.8-10.2C39.6 15.7 42 14.3 42 12.5z"/></svg>
     <span>LINEで相談</span>
   </a>
 

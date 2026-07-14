@@ -77,9 +77,35 @@ img { max-width: 100%; display: block; }
 @keyframes preloaderPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
 @keyframes preloaderLine { 0%{width:0;opacity:0} 50%{width:60px;opacity:1} 100%{width:0;opacity:0} }
 
+/* --- ニュースティッカー --- */
+.news-ticker {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
+  background: #2a2820; color: #ccc8be;
+  font-size: 0.68rem; letter-spacing: 0.05em;
+  overflow: hidden; height: 32px; line-height: 32px;
+}
+.news-ticker-track {
+  display: flex; gap: 48px;
+  white-space: nowrap;
+  animation: tickerScroll 30s linear infinite;
+}
+.news-ticker-track span {
+  flex-shrink: 0;
+  padding: 0 24px;
+  position: relative;
+}
+.news-ticker-track span::after {
+  content: '|'; position: absolute; right: -24px;
+  color: rgba(255,255,255,0.2);
+}
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* --- ナビゲーション --- */
 .nav {
-  position: fixed; top: 0; left: 0; right: 0;
+  position: fixed; top: 32px; left: 0; right: 0;
   z-index: 1000; padding: 16px 0;
   transition: all 0.4s ease;
 }
@@ -162,6 +188,7 @@ img { max-width: 100%; display: block; }
 /* --- ヒーロー --- */
 .hero {
   position: relative; height: 65vh; min-height: 480px;
+  margin-top: 32px;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   background: linear-gradient(175deg, #f5f1ea 0%, #ebe6db 40%, #e2dcd0 100%);
@@ -282,6 +309,25 @@ img { max-width: 100%; display: block; }
   margin-top: 16px; line-height: 1.8;
 }
 
+/* --- 検索バー --- */
+.search-bar {
+  display: flex; align-items: center; gap: 10px;
+  max-width: 400px; margin: 0 auto 24px;
+  padding: 10px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  transition: border-color 0.3s;
+}
+.search-bar:focus-within { border-color: var(--gold); }
+.search-bar svg { color: var(--text-muted); flex-shrink: 0; }
+.search-bar input {
+  flex: 1; border: none; outline: none;
+  background: transparent; font-family: var(--font-body);
+  font-size: 0.82rem; color: var(--text-primary);
+}
+.search-bar input::placeholder { color: var(--text-muted); }
+
 /* --- カテゴリフィルター（プレミアム ピル型） --- */
 .filter-tabs {
   display: flex; gap: 10px; margin-bottom: 40px;
@@ -361,6 +407,34 @@ img { max-width: 100%; display: block; }
   position: absolute; inset: 0;
   background: rgba(250, 248, 244, 0.3); z-index: 1;
 }
+
+/* --- お気に入りボタン --- */
+.fav-btn {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.85); border: none;
+  border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+.fav-btn svg { width: 16px; height: 16px; color: var(--text-muted); transition: all 0.3s; }
+.fav-btn:hover { background: #fff; }
+.fav-btn:hover svg { color: #c62828; }
+.fav-btn.active svg { fill: #c62828; stroke: #c62828; color: #c62828; }
+
+/* --- 写真メッセージオーバーレイ --- */
+.product-photo-msg {
+  position: absolute; inset: 0; z-index: 2;
+  background: rgba(26, 26, 24, 0.55);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 0.75rem; font-weight: 400;
+  letter-spacing: 0.1em;
+  opacity: 0; transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
+}
+.product-card:hover .product-photo-msg { opacity: 1; }
+.product-card[data-status="sold"]:hover .product-photo-msg { opacity: 0; }
 
 .product-badge {
   position: absolute; top: 12px; left: 12px;
@@ -465,6 +539,12 @@ img { max-width: 100%; display: block; }
 .product-inquiry.inquiry-notify:hover {
   border-color: var(--gold);
   color: var(--gold);
+}
+
+/* --- 商品ノート --- */
+.products-note {
+  text-align: center; margin-top: 32px;
+  font-size: 0.75rem; color: var(--text-muted);
 }
 
 /* --- 人気ランキング --- */
@@ -668,6 +748,123 @@ img { max-width: 100%; display: block; }
   font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7;
 }
 
+/* --- ブログカード --- */
+.blog-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.blog-card {
+  background: var(--bg-card); border-radius: 4px;
+  overflow: hidden; box-shadow: var(--shadow-sm);
+  transition: all 0.4s ease;
+}
+.blog-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.blog-image {
+  height: 160px;
+  background: var(--bg, var(--bg-secondary));
+}
+.blog-info { padding: 20px; }
+.blog-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  background: var(--gold); color: #fff;
+  font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 0.15em; border-radius: 2px;
+  margin-bottom: 10px;
+}
+.blog-info h3 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem; font-weight: 500;
+  margin-bottom: 8px; line-height: 1.5;
+}
+.blog-info p {
+  font-size: 0.78rem; color: var(--text-secondary);
+  line-height: 1.6; margin-bottom: 12px;
+}
+.blog-more {
+  font-size: 0.72rem; color: var(--gold);
+  font-weight: 500; letter-spacing: 0.05em;
+}
+
+/* --- ご利用案内タブ --- */
+.info-tabs {
+  display: flex; justify-content: center; gap: 8px;
+  margin-bottom: 40px;
+}
+.info-tab {
+  padding: 10px 28px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.78rem; font-weight: 400;
+  cursor: pointer; transition: all 0.3s ease;
+}
+.info-tab:hover { border-color: var(--gold); color: var(--gold); }
+.info-tab.active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border-color: transparent; color: #fff; font-weight: 500;
+  box-shadow: 0 3px 14px rgba(168, 134, 46, 0.3);
+}
+.info-panel { display: none; max-width: 700px; margin: 0 auto; }
+.info-panel.active { display: block; }
+
+/* --- FAQ アコーディオン --- */
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item {
+  background: var(--bg-card); border-radius: 4px;
+  box-shadow: var(--shadow-sm); overflow: hidden;
+}
+.faq-q {
+  width: 100%; padding: 18px 24px;
+  background: none; border: none;
+  font-family: var(--font-body);
+  font-size: 0.88rem; font-weight: 500;
+  color: var(--text-primary);
+  text-align: left; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: color 0.3s;
+}
+.faq-q::after {
+  content: '+'; font-size: 1.2rem; color: var(--gold);
+  font-weight: 300; transition: transform 0.3s;
+}
+.faq-item.open .faq-q::after { content: '-'; }
+.faq-q:hover { color: var(--gold); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.faq-item.open .faq-a { max-height: 300px; }
+.faq-a p {
+  padding: 0 24px 18px;
+  font-size: 0.82rem; color: var(--text-secondary); line-height: 1.8;
+}
+
+/* --- 送料テーブル --- */
+.shipping-content {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  max-width: 800px; margin: 0 auto;
+}
+.shipping-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.shipping-table th {
+  text-align: left; padding: 10px 16px;
+  background: var(--bg-alt, var(--bg-secondary));
+  font-weight: 500; font-size: 0.75rem;
+  letter-spacing: 0.05em; color: var(--text-secondary);
+  border-bottom: 2px solid var(--gold);
+}
+.shipping-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.shipping-table td:last-child { font-weight: 500; color: var(--gold-dark); }
+.shipping-notes { font-size: 0.8rem; color: var(--text-secondary); line-height: 2; }
+.shipping-notes strong { color: var(--text-primary); font-weight: 500; }
+
 /* --- お客様の声 --- */
 .stats-bar {
   display: grid; grid-template-columns: repeat(4, 1fr);
@@ -735,6 +932,99 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-display);
   font-size: 0.95rem; color: var(--text-primary);
 }
+
+/* --- モーダル --- */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: all 0.3s ease;
+  padding: 24px;
+}
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal {
+  background: var(--bg-card);
+  border-radius: 8px;
+  max-width: 600px; width: 100%;
+  max-height: 85vh; overflow-y: auto;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.modal-overlay.active .modal { transform: translateY(0); }
+.modal-close {
+  position: sticky; top: 0; float: right;
+  width: 40px; height: 40px; margin: 12px 12px 0 0;
+  background: rgba(255,255,255,0.9); border: none;
+  border-radius: 50%; cursor: pointer;
+  font-size: 1.4rem; color: var(--text-muted);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1; transition: color 0.3s;
+}
+.modal-close:hover { color: var(--text-primary); }
+.modal-body { padding: 0 28px 28px; }
+.modal-category {
+  font-family: var(--font-display);
+  font-size: 0.6rem; font-weight: 400;
+  letter-spacing: 0.2em; color: var(--gold);
+}
+.modal-name {
+  font-family: var(--font-heading);
+  font-size: 1.3rem; font-weight: 500;
+  margin: 4px 0 2px;
+}
+.modal-scientific {
+  font-family: var(--font-display);
+  font-size: 0.8rem; font-style: italic;
+  color: var(--text-muted); margin-bottom: 12px;
+}
+.modal-status-price {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 16px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-price {
+  font-family: var(--font-display);
+  font-size: 1.4rem; font-weight: 600;
+  color: var(--gold-dark);
+}
+.modal-desc {
+  font-size: 0.85rem; color: var(--text-secondary);
+  line-height: 1.8; margin-bottom: 20px;
+}
+.modal-care-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem; font-weight: 500;
+  margin-bottom: 12px; color: var(--gold);
+  letter-spacing: 0.1em;
+}
+.modal-care-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  margin-bottom: 20px;
+}
+.modal-care-item {
+  padding: 10px 14px; background: var(--bg-secondary, #f3f0ea);
+  border-radius: 4px; font-size: 0.78rem;
+}
+.modal-care-item strong {
+  display: block; font-size: 0.65rem;
+  color: var(--text-muted); font-weight: 400;
+  letter-spacing: 0.08em; margin-bottom: 2px;
+}
+.modal-actions {
+  display: flex; gap: 10px;
+}
+.modal-cta {
+  flex: 1; padding: 12px;
+  background: var(--gold); color: #fff;
+  font-size: 0.78rem; font-weight: 500;
+  text-align: center; border-radius: 4px;
+  transition: background 0.3s;
+  display: block;
+}
+.modal-cta:hover { background: var(--gold-dark); }
 
 /* --- フッター --- */
 .footer {
@@ -838,6 +1128,9 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 768px) {
+  .news-ticker { height: 28px; line-height: 28px; font-size: 0.6rem; }
+  .nav { top: 28px; }
+  .hero { margin-top: 28px; }
   .nav-links, .nav-line-btn { display: none; }
   .nav-toggle { display: flex; }
   .section { padding: 64px 0; }
@@ -863,6 +1156,13 @@ img { max-width: 100%; display: block; }
     justify-content: space-between;
     padding-top: 8px; border-top: 1px solid var(--border);
   }
+  .blog-grid { grid-template-columns: 1fr; }
+  .info-tabs { flex-wrap: wrap; gap: 6px; }
+  .info-tab { padding: 8px 20px; font-size: 0.72rem; }
+  .shipping-content { grid-template-columns: 1fr; gap: 20px; }
+  .modal { max-height: 90vh; border-radius: 4px; }
+  .modal-body { padding: 0 20px 20px; }
+  .modal-care-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
