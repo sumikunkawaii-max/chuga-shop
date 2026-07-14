@@ -266,14 +266,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = document.querySelector(`.product-card[data-id="${id}"]`);
     const name = card.querySelector('.product-name').textContent;
     const sci = card.querySelector('.product-scientific').textContent;
+    const price = card.querySelector('.product-price').innerHTML;
+    const statusEl = card.querySelector('.product-status');
+    const statusHTML = statusEl ? statusEl.outerHTML : '';
+    const category = card.querySelector('.product-category').textContent;
+
+    // 商品画像を取得（あれば実写、なければプレースホルダ）
+    const photoEl = card.querySelector('.product-photo');
+    const silEl = card.querySelector('.product-silhouette');
+    const imageHTML = photoEl
+      ? `<img src="${photoEl.src}" alt="${name}">`
+      : `<span class="modal-image-placeholder">${silEl ? silEl.textContent : ''}</span>`;
 
     modalBody.innerHTML = `
-      <div class="modal-care-header">
-        <span class="modal-category">飼育環境マニュアル</span>
-        <h2 class="modal-name">${name}</h2>
-        <p class="modal-scientific">${sci}</p>
+      <div class="modal-image">${imageHTML}</div>
+      <span class="modal-category">${category}</span>
+      <h2 class="modal-name">${name}</h2>
+      <p class="modal-scientific">${sci}</p>
+      <div class="modal-status-price">
+        ${statusHTML}
+        <span class="modal-price">${price}</span>
       </div>
-      <div class="modal-care-basic">
+      <div class="modal-actions" style="margin-bottom:28px">
+        <a href="#contact" class="modal-cta" onclick="document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow=''">LINEで問い合わせる</a>
+      </div>
+      <h3 class="modal-care-title">飼育環境マニュアル</h3>
+      <div class="modal-care-basic modal-care-grid">
         <div class="modal-care-item"><strong>原産地</strong>${care.origin}</div>
         <div class="modal-care-item"><strong>最大サイズ</strong>${care.maxSize}</div>
         <div class="modal-care-item"><strong>寿命</strong>${care.lifespan}</div>
