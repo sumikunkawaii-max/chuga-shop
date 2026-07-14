@@ -105,7 +105,7 @@ img { max-width: 100%; display: block; }
 
 /* --- ナビゲーション --- */
 .nav {
-  position: fixed; top: 32px; left: 0; right: 0;
+  position: fixed; top: 0; left: 0; right: 0;
   z-index: 1000; padding: 16px 0;
   transition: all 0.4s ease;
 }
@@ -189,7 +189,6 @@ img { max-width: 100%; display: block; }
 /* --- ヒーロー（高級感強化） --- */
 .hero {
   position: relative; height: 65vh; min-height: 480px;
-  margin-top: 32px;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   background:
@@ -283,6 +282,10 @@ img { max-width: 100%; display: block; }
   font-size: 0.78rem; font-weight: 500;
   letter-spacing: 0.2em;
   transition: all 0.4s ease;
+}
+.hero-trust {
+  font-size: 0.7rem; color: var(--text-muted);
+  letter-spacing: 0.1em; margin-bottom: 28px;
 }
 .hero-cta:hover {
   background: var(--gold);
@@ -1160,7 +1163,7 @@ img { max-width: 100%; display: block; }
 
 /* --- フッター --- */
 .footer {
-  padding: 64px 0 32px;
+  padding: 40px 0;
   background: #2a2820;
   color: #ccc8be;
 }
@@ -1263,9 +1266,7 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 768px) {
-  .news-ticker { height: 28px; line-height: 28px; font-size: 0.6rem; }
-  .nav { top: 28px; }
-  .hero { margin-top: 28px; height: 60vh; min-height: 420px; }
+  .hero { height: 60vh; min-height: 420px; }
   .nav-links, .nav-line-btn { display: none; }
   .nav-toggle { display: flex; }
   .section { padding: 64px 0; }
