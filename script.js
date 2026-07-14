@@ -1,5 +1,5 @@
 /* ========================================
-   セレクト昆虫専門店 - メインスクリプト
+   セレクト昆虫専門店 - メインスクリプト v2
    ======================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,30 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- プリローダー ---
   const preloader = document.getElementById('preloader');
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      preloader.classList.add('loaded');
-    }, 800);
+    setTimeout(() => preloader.classList.add('loaded'), 600);
   });
+  setTimeout(() => preloader.classList.add('loaded'), 2500);
 
-  // フォールバック（3秒後に強制非表示）
-  setTimeout(() => {
-    preloader.classList.add('loaded');
-  }, 3000);
-
-  // --- ナビゲーション スクロール処理 ---
+  // --- ナビゲーション スクロール ---
   const nav = document.getElementById('nav');
-  let lastScroll = 0;
-
   window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-
-    if (currentScroll > 80) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-
-    lastScroll = currentScroll;
+    nav.classList.toggle('scrolled', window.scrollY > 60);
   });
 
   // --- ハンバーガーメニュー ---
@@ -43,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
   });
 
-  // モバイルメニューのリンクをクリックしたら閉じる
   mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navToggle.classList.remove('active');
@@ -52,31 +35,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- スクロールアニメーション（Intersection Observer） ---
+  // --- スクロールアニメーション ---
   const fadeElements = document.querySelectorAll('.fade-up');
-
   const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // 少しずつ遅延させて順番にフェードイン
         const delay = entry.target.dataset.delay || 0;
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, delay);
+        setTimeout(() => entry.target.classList.add('visible'), delay);
         fadeObserver.unobserve(entry.target);
       }
     });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
   fadeElements.forEach((el, index) => {
-    // 同じセクション内の要素に連続した遅延を設定
-    const siblings = el.parentElement.querySelectorAll('.fade-up');
+    const siblings = el.parentElement.querySelectorAll(':scope > .fade-up');
     const siblingIndex = Array.from(siblings).indexOf(el);
-    el.dataset.delay = siblingIndex * 100;
+    el.dataset.delay = siblingIndex * 80;
     fadeObserver.observe(el);
+  });
+
+  // --- カテゴリフィルター ---
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  const productCards = document.querySelectorAll('.product-card');
+
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // タブのアクティブ状態を更新
+      filterTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const category = tab.dataset.category;
+
+      productCards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('filtered-out');
+        } else {
+          card.classList.add('filtered-out');
+        }
+      });
+    });
   });
 
   // --- ヒーローパーティクル ---
@@ -85,51 +82,50 @@ document.addEventListener('DOMContentLoaded', () => {
   function createParticle() {
     const particle = document.createElement('div');
     particle.classList.add('particle');
-
     const x = Math.random() * 100;
     const size = Math.random() * 2 + 1;
     const duration = Math.random() * 8 + 6;
     const delay = Math.random() * 4;
-
     particle.style.left = x + '%';
     particle.style.bottom = '-10px';
     particle.style.width = size + 'px';
     particle.style.height = size + 'px';
     particle.style.animationDuration = duration + 's';
     particle.style.animationDelay = delay + 's';
-
     particlesContainer.appendChild(particle);
-
-    // アニメーション終了後に要素を削除して再生成
     setTimeout(() => {
       particle.remove();
       createParticle();
     }, (duration + delay) * 1000);
   }
 
-  // パーティクル20個を生成
-  for (let i = 0; i < 20; i++) {
-    createParticle();
-  }
+  for (let i = 0; i < 15; i++) createParticle();
 
-  // --- スムーズスクロール（アンカーリンク） ---
+  // --- スムーズスクロール ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const targetId = anchor.getAttribute('href');
       if (targetId === '#') return;
-
       const target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
         const navHeight = nav.offsetHeight;
         const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight;
-
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
       }
     });
   });
+
+  // --- LINE固定ボタン表示（スクロール後に表示） ---
+  const lineFloat = document.getElementById('lineFloat');
+  const lineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // ヒーローが見えなくなったらLINEボタンを表示
+      lineFloat.classList.toggle('visible', !entry.isIntersecting);
+    });
+  }, { threshold: 0 });
+
+  const heroSection = document.getElementById('hero');
+  lineObserver.observe(heroSection);
 
 });
