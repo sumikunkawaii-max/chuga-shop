@@ -1,5 +1,5 @@
 /* ========================================
-   蟲雅 CHUGA - Exotic Arthropod Boutique
+   セレクト昆虫専門店 - SELECT INSECTS
    高級ダークテーマ スタイルシート
    ======================================== */
 
@@ -101,11 +101,11 @@ img {
 }
 
 .preloader-text {
-  font-family: var(--font-heading);
-  font-size: 3rem;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
   font-weight: 300;
   color: var(--gold);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.4em;
   display: block;
   animation: preloaderPulse 2s ease-in-out infinite;
 }
@@ -169,10 +169,10 @@ img {
 
 .nav-logo-jp {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--gold);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
 }
 
 .nav-logo-en {
@@ -336,9 +336,8 @@ img {
   margin-bottom: 16px;
 }
 
-.hero-title-char {
-  display: inline-block;
-  font-size: clamp(5rem, 15vw, 12rem);
+.hero-title-line {
+  display: block;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   background-clip: text;
@@ -347,7 +346,14 @@ img {
   background-size: 200% 100%;
 }
 
-.hero-title-char:nth-child(2) {
+.hero-title-line:first-child {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  letter-spacing: 0.3em;
+}
+
+.hero-title-line:last-child {
+  font-size: clamp(3rem, 10vw, 7rem);
+  letter-spacing: 0.1em;
   animation-delay: 0.5s;
 }
 
@@ -1089,10 +1095,10 @@ img {
 
 .footer-logo-jp {
   font-family: var(--font-heading);
-  font-size: 2rem;
-  font-weight: 300;
+  font-size: 1.3rem;
+  font-weight: 400;
   color: var(--gold);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   display: block;
 }
 
