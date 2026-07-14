@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="modal-price">${price}</span>
       </div>
       <div class="modal-actions" style="margin-bottom:28px">
-        <a href="#contact" class="modal-cta" onclick="document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow=''">LINEで問い合わせる</a>
+        <a href="#contact" class="modal-cta" onclick="document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow=''">XのDMで問い合わせる</a>
       </div>
       <h3 class="modal-care-title">飼育環境マニュアル</h3>
       <div class="modal-care-basic modal-care-grid">
