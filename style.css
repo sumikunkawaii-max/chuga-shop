@@ -408,18 +408,20 @@ img { max-width: 100%; display: block; }
   background: rgba(250, 248, 244, 0.3); z-index: 1;
 }
 
-/* --- お気に入りボタン --- */
+/* --- お気に入りボタン（控えめに） --- */
 .fav-btn {
-  position: absolute; top: 12px; right: 12px; z-index: 3;
-  width: 32px; height: 32px;
-  background: rgba(255,255,255,0.85); border: none;
+  position: absolute; top: 8px; right: 8px; z-index: 3;
+  width: 28px; height: 28px;
+  background: rgba(255,255,255,0.5); border: none;
   border-radius: 50%; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.3s ease;
-  backdrop-filter: blur(4px);
+  opacity: 0;
 }
-.fav-btn svg { width: 16px; height: 16px; color: var(--text-muted); transition: all 0.3s; }
-.fav-btn:hover { background: #fff; }
+.product-card:hover .fav-btn { opacity: 1; }
+.fav-btn.active { opacity: 1; background: rgba(255,255,255,0.85); }
+.fav-btn svg { width: 14px; height: 14px; color: var(--text-muted); transition: all 0.3s; }
+.fav-btn:hover { background: rgba(255,255,255,0.9); }
 .fav-btn:hover svg { color: #c62828; }
 .fav-btn.active svg { fill: #c62828; stroke: #c62828; color: #c62828; }
 
@@ -436,13 +438,15 @@ img { max-width: 100%; display: block; }
 .product-card:hover .product-photo-msg { opacity: 1; }
 .product-card[data-status="sold"]:hover .product-photo-msg { opacity: 0; }
 
+/* バッジは商品名の横に配置（画像エリアから撤去） */
 .product-badge {
-  position: absolute; top: 12px; left: 12px;
-  padding: 3px 10px;
-  font-size: 0.6rem; font-weight: 600;
-  letter-spacing: 0.1em;
+  display: inline-block; vertical-align: middle;
+  padding: 2px 8px; margin-left: 6px;
+  font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 0.08em;
   background: var(--gold); color: #fff;
-  border-radius: 2px; z-index: 2;
+  border-radius: 2px;
+  position: static;
 }
 .product-badge.badge-hot { background: #c62828; }
 .product-badge.badge-rare { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
